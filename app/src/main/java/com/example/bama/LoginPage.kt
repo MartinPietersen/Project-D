@@ -50,13 +50,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bama.ui.theme.GrayDark
 import com.example.bama.ui.theme.GrayLight
 import com.example.bama.ui.theme.Green
-import com.example.bama.ui.theme.WhiteBroken
+
 
 
 @Composable
@@ -112,9 +111,7 @@ fun RememberButton() {
             onCheckedChange = { rememberMe = it },
             colors = SwitchDefaults.colors(
                 checkedTrackColor = Green,
-                uncheckedBorderColor = Color.DarkGray,
-                uncheckedThumbColor = Color.DarkGray,
-                uncheckedTrackColor = Color.LightGray
+
                 ),
             modifier = Modifier
                 .graphicsLayer { scaleX = 1.2f; scaleY = 1.1f }
@@ -144,11 +141,11 @@ fun LoginForm() {
                     Icon(
                         imageVector = Icons.Default.Email,
                         contentDescription = "Email",
-                        tint = Color.Black
+                        tint = GrayDark
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        "Vul uw email-adres in", color = Color.Black
+                        "Vul uw email-adres in", color = GrayDark
                     )
                 }
             },
@@ -169,11 +166,11 @@ fun LoginForm() {
                     Icon(
                         imageVector = Icons.Default.Lock,
                         contentDescription = "Wachtwoord",
-                        tint = Color.Black
+                        tint = GrayDark
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        "Vul uw wachtwoord in", color = Color.Black
+                        "Vul uw wachtwoord in", color = GrayDark
                     )
                 }
             },
@@ -200,7 +197,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
             // Reveal the background canvas
             .padding(0.dp, 150.dp, 0.dp, 0.dp)
             // colour the rest of the screen white
-            .background(WhiteBroken, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp))
+            .background(Color.White, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp))
             // add padding for the rest of the content
             .padding(26.dp, 10.dp)
     ) {
@@ -245,7 +242,7 @@ fun TopNavigationBar() {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
                 contentDescription = "Back",
-                tint = WhiteBroken,
+                tint = Color.White,
                 modifier = Modifier.size(50.dp)
             )
         }
@@ -254,7 +251,7 @@ fun TopNavigationBar() {
         )
         Text(
             text = "Inloggen",
-            color = WhiteBroken,
+            color = Color.White,
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp,
@@ -283,14 +280,14 @@ fun WelcomeTextSection() {
 @Composable
 fun LoginActions(onLoginSuccess: () -> Unit) {
     Column {
-        TextButton(onClick = { /*TODO*/ }, contentPadding = PaddingValues(0.dp), shape = RoundedCornerShape(8.dp)) {
+        TextButton(onClick = { /*TODO*/ }, contentPadding = PaddingValues(0.dp)) {
             Text(
                 text = "Wachtwoord vergeten?", fontSize = 16.sp, color = Green
             )
         }
         Button(
             onClick = onLoginSuccess, colors = ButtonDefaults.buttonColors(
-                containerColor = Green, contentColor = WhiteBroken
+                containerColor = Green, contentColor = Color.White
             ), shape = RoundedCornerShape(8.dp), modifier = Modifier.fillMaxWidth()
         ) {
             Text(
@@ -301,7 +298,7 @@ fun LoginActions(onLoginSuccess: () -> Unit) {
         Button(
             onClick = { /*TODO*/ },
             colors = ButtonDefaults.buttonColors(
-                containerColor = WhiteBroken,
+                containerColor = Color.White,
                 contentColor = Green,
             ),
             shape = RoundedCornerShape(8.dp),
@@ -360,7 +357,7 @@ fun ActivityButton(activity: Activity, color: Color) {
                 text = activity.name,
                 modifier = Modifier.padding(8.dp),
                 fontSize = 20.sp,
-                color = WhiteBroken
+                color = Color.White
             )
 
         }

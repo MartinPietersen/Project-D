@@ -4,28 +4,28 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.absolutePadding
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Send
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,6 +34,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontFamily
@@ -41,38 +44,86 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.bama.ui.theme.Gray
 import com.example.bama.ui.theme.GrayDark
 import com.example.bama.ui.theme.Green
 import com.example.bama.ui.theme.GreenDark
 import com.example.bama.ui.theme.GreenLight
 import com.example.bama.ui.theme.NavBarButtons
-import com.example.bama.ui.theme.WhiteBroken
 
-//import com.example.bama.ui.theme.NavBarButtons
 
 @Composable
 @Preview
 fun ActivitiesScreen() {
-    Column(
-        Modifier.background(Color.White)
-    ) {
-        Box(
-            modifier = Modifier.weight(0.28f)
-        ) {
-            ActivitiesTopBox(Modifier)
-        }
-        Box() {
-            ActivitiesStatusBar()
-        }
-        Box(modifier = Modifier.weight(0.52f)) {
-            ActivityGrid(Modifier)
-        }
-        Box(
-            modifier = Modifier.weight(0.10f)
-        ) {
+
+//    WhiteBackGround()
+    Scaffold(
+        topBar = {
+        },
+        content = {
+            var padding by remember { mutableStateOf(it) }
+            Column {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .background(
+                            color = Green,
+                            shape = RoundedCornerShape(bottomEnd = 55.dp)
+                        )
+                        .drawOvalsBehind()
+                )
+                {
+                    Column {
+                        TopBar(Modifier)
+                        SearchBar(Modifier)
+                    }
+                }
+
+                Column {
+                    ActivitiesStatusBar()
+                    ActivityGrid(Modifier.padding(it))
+                }
+            }
+        },
+        bottomBar = {
             NavBarButtons()
         }
+    )
+}
+
+private fun Modifier.drawOvalsBehind(): Modifier {
+    return drawBehind {
+        drawOval(
+            color = Color(0xFFFFFFFF).copy(alpha = 0.25f), topLeft = Offset(
+                x = size.width - 100.dp.toPx(), y = -50.dp.toPx()
+            ), size = Size(
+                width = 200.dp.toPx(), height = 200.dp.toPx()
+            )
+        )
+
+        // Small circle above the big circle
+        drawOval(
+            color = Color(0xFFFFFFFF).copy(alpha = 0.25f), topLeft = Offset(
+                x = size.width - 150.dp.toPx(), y = -90.dp.toPx()
+            ), size = Size(
+                width = 130.dp.toPx(), height = 130.dp.toPx()
+            )
+        )
     }
+}
+
+@Preview
+@Composable
+fun WhiteBackGround() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                color = Color.White
+            )
+    )
+
 }
 
 @Composable
@@ -88,7 +139,7 @@ fun ActivitiesStatusBar() {
             icon = Icons.Default.DateRange,
             description = "Overzicht",
             modifier = Modifier,
-            color = GreenLight
+            color = Gray
         )
         ActivityStatusButton(
             icon = Icons.Default.DateRange,
@@ -101,6 +152,7 @@ fun ActivitiesStatusBar() {
 
 @Composable
 fun ActivityStatusButton(icon: ImageVector, description: String, modifier: Modifier, color: Color) {
+    //
     var buttoncolor by remember { mutableStateOf(color) }
     Button(
         onClick = { /*TODO*/ },
@@ -120,25 +172,22 @@ fun ActivityStatusButton(icon: ImageVector, description: String, modifier: Modif
 
 @Composable
 fun ActivitiesTopBox(modifier: Modifier) {
+//    Box(
+//        modifier = modifier
+//            .fillMaxWidth()
+//            .background(
+//                color = Green,
+//                shape = RoundedCornerShape(bottomEnd = 55.dp)
+//            )
+//    ) {
     Column {
-        Box(
-            modifier = modifier
-                .fillMaxWidth()
-                .background(
-                    color = Green,
-                    shape = RoundedCornerShape(bottomEnd = 55.dp)
-                )
-        )
-        {
-            Column {
-                TopBar(Modifier)
-                SearchBar(Modifier)
-            }
-        }
-        // Green background with rounded bottom right corner
+        OverlayedOvals()
+        TopBar(Modifier)
+        SearchBar(Modifier)
     }
-    OverlayedOvals()
+//    }
 }
+// Green background with rounded bottom right corner
 
 @Composable
 fun TopBar(modifier: Modifier) {
@@ -170,7 +219,7 @@ fun SearchBar(modifier: Modifier) {
         shape = RoundedCornerShape(8.dp, 8.dp, 55.dp, 8.dp),
         modifier = modifier
             .fillMaxWidth()
-            .padding(10.dp, 5.dp),
+            .padding(10.dp, 10.dp),
         value = search,
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedContainerColor = Color.White,
