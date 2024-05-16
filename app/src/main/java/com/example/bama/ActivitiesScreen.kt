@@ -4,8 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -14,7 +16,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -40,6 +45,10 @@ import com.example.bama.ui.theme.GrayDark
 import com.example.bama.ui.theme.Green
 import com.example.bama.ui.theme.GreenDark
 import com.example.bama.ui.theme.GreenLight
+import com.example.bama.ui.theme.NavBarButtons
+import com.example.bama.ui.theme.WhiteBroken
+
+//import com.example.bama.ui.theme.NavBarButtons
 
 @Composable
 @Preview
@@ -57,6 +66,11 @@ fun ActivitiesScreen() {
         }
         Box(modifier = Modifier.weight(0.52f)) {
             ActivityGrid(Modifier)
+        }
+        Box(
+            modifier = Modifier.weight(0.10f)
+        ) {
+            NavBarButtons()
         }
     }
 }
@@ -87,7 +101,6 @@ fun ActivitiesStatusBar() {
 
 @Composable
 fun ActivityStatusButton(icon: ImageVector, description: String, modifier: Modifier, color: Color) {
-    //
     var buttoncolor by remember { mutableStateOf(color) }
     Button(
         onClick = { /*TODO*/ },
