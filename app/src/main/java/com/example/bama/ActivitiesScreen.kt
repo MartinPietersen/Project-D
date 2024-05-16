@@ -4,16 +4,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -34,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -47,16 +50,19 @@ import androidx.compose.ui.unit.sp
 import com.example.bama.ui.theme.Gray
 import com.example.bama.ui.theme.GrayDark
 import com.example.bama.ui.theme.Green
-import com.example.bama.ui.theme.GreenDark
-import com.example.bama.ui.theme.GreenLight
 import com.example.bama.ui.theme.NavBarButtons
+import com.example.bama.ui.theme.WhiteBroken
 
 
 @Composable
 @Preview
 fun ActivitiesScreen() {
+    var selectedButtonIndex by remember { mutableStateOf(0) }
 
-//    WhiteBackGround()
+    val onValueChange: (Int) -> Unit = { index ->
+        selectedButtonIndex = index
+    }
+    WhiteBackGround()
     Scaffold(
         topBar = {
         },
@@ -81,7 +87,9 @@ fun ActivitiesScreen() {
                 }
 
                 Column {
-                    ActivitiesStatusBar()
+                    ActivitiesStatusBar(selectedButtonIndex, onValueChange)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    UpcomingActivities()
                     ActivityGrid(Modifier.padding(it))
                 }
             }
@@ -113,6 +121,75 @@ private fun Modifier.drawOvalsBehind(): Modifier {
     }
 }
 
+@Composable
+fun UpcomingActivities() {
+    Column(
+        modifier = Modifier.padding()
+    ) {
+        Row(
+            modifier = Modifier.padding(12.dp, 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(text = "Aankomende activiteiten", style = MaterialTheme.typography.titleLarge, color = Color.Black, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.weight(1f))
+            Button(onClick = { /*TODO*/ },
+                shape = RoundedCornerShape(8.dp),
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = WhiteBroken,
+                    containerColor = GrayDark
+                ),
+                contentPadding = PaddingValues(8.dp, 0.dp),
+                modifier = Modifier.wrapContentHeight()) {
+                Text(text = "Bekijk alles")
+            }
+        }
+        LazyRow() {
+            item {
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Activiteit 1")
+                }
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Activiteit 1")
+                }
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Activiteit 1")
+                }
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Activiteit 1")
+                }
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Activiteit 1")
+                }
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Activiteit 1")
+                }
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Activiteit 1")
+                }
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Activiteit 1")
+                }
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Activiteit 1")
+                }
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Activiteit 1")
+                }
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Activiteit 1")
+                }
+
+            }
+            
+        }
+    }
+}
+
+@Composable
+fun ActivityCard() {
+
+}
+
 @Preview
 @Composable
 fun WhiteBackGround() {
@@ -120,49 +197,77 @@ fun WhiteBackGround() {
         modifier = Modifier
             .fillMaxSize()
             .background(
-                color = Color.White
+                color = WhiteBroken
             )
     )
 
 }
 
 @Composable
-fun ActivitiesStatusBar() {
-    Row() {
+fun ActivitiesStatusBar(selectedButtonIndex: Int, onValueChange: (Int) -> Unit) {
+
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp, 8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         ActivityStatusButton(
             icon = Icons.Default.DateRange,
             description = "Overzicht",
-            color = Green,
-            modifier = Modifier
+            color = if (selectedButtonIndex == 0) Green else Gray,
+            modifier = Modifier.weight(0.33f),
+            onValueChange = { onValueChange(0) },
         )
         ActivityStatusButton(
             icon = Icons.Default.DateRange,
             description = "Overzicht",
-            modifier = Modifier,
-            color = Gray
+            modifier = Modifier.weight(0.33f),
+            color = if (selectedButtonIndex == 1) Green else Gray,
+            onValueChange = { onValueChange(1) },
         )
         ActivityStatusButton(
             icon = Icons.Default.DateRange,
             description = "Overzicht",
-            modifier = Modifier,
-            color = GreenDark
+            modifier = Modifier.weight(0.33f),
+            color = if (selectedButtonIndex == 2) Green else Gray,
+            onValueChange = { onValueChange(2) },
         )
     }
 }
 
 @Composable
-fun ActivityStatusButton(icon: ImageVector, description: String, modifier: Modifier, color: Color) {
+fun ActivityStatusButton(
+    icon: ImageVector,
+    description: String,
+    modifier: Modifier,
+    color: Color,
+    onValueChange: () -> Unit,
+) {
     //
-    var buttoncolor by remember { mutableStateOf(color) }
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onValueChange,
         colors = ButtonDefaults.buttonColors(
-            containerColor = buttoncolor,
+            containerColor = color,
             contentColor = Color.White
         ),
+        shape = RoundedCornerShape(8.dp),
     ) {
-        Column {
-            Icon(imageVector = icon, contentDescription = description)
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Box(modifier = Modifier
+                .clip(RoundedCornerShape(8.dp))
+                .wrapContentHeight()
+                .background(WhiteBroken)
+                .padding(4.dp)) {
+                Icon(
+                    imageVector = icon, contentDescription = description,
+                    modifier = Modifier,
+                    tint = color
+                )
+            }
             Text(
                 text = description,
             )
