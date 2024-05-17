@@ -58,7 +58,7 @@ import com.example.bama.ActivityStatusButton
 
 @Composable
 fun NavBarButtons()
-{/*hi*/
+{
     Row(modifier = Modifier.fillMaxWidth().background(WhiteBroken)) {
         Button(
             onClick = {},

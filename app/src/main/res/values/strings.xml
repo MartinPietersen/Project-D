@@ -3,4 +3,5 @@
     <string name="login">Inloggen</string>
     <string name="activities_page">Activiteiten</string>
     <string name="activity_details">Activiteit</string>
+    <string name="forgot_password_page">WachtwoordVergeten</string>
 </resources>

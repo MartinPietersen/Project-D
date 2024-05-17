@@ -50,8 +50,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.bama.ui.theme.GrayDark
 import com.example.bama.ui.theme.GrayLight
 import com.example.bama.ui.theme.Green
@@ -185,7 +187,7 @@ fun LoginForm() {
 }
 
 @Composable
-fun LoginScreen(onLoginSuccess: () -> Unit) {
+fun LoginScreen(onLoginSuccess: () -> Unit){
 
     BackgroundCanvas()
     TopNavigationBar()
@@ -280,7 +282,7 @@ fun WelcomeTextSection() {
 @Composable
 fun LoginActions(onLoginSuccess: () -> Unit) {
     Column {
-        TextButton(onClick = { /*TODO*/ }, contentPadding = PaddingValues(0.dp)) {
+        TextButton(onClick = { /*ToDo*/ }, contentPadding = PaddingValues(0.dp)) {
             Text(
                 text = "Wachtwoord vergeten?", fontSize = 16.sp, color = Green
             )
