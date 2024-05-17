@@ -53,6 +53,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.bama.ui.theme.GrayDark
 import com.example.bama.ui.theme.GrayLight
@@ -187,26 +188,20 @@ fun LoginForm() {
 }
 
 @Composable
-fun LoginScreen(onLoginSuccess: () -> Unit){
-
+fun LoginPage(navController: NavController) {
     BackgroundCanvas()
     TopNavigationBar()
 
     Column(
         modifier = Modifier
-            // first fill screen
             .fillMaxSize()
-            // Reveal the background canvas
             .padding(0.dp, 150.dp, 0.dp, 0.dp)
-            // colour the rest of the screen white
             .background(Color.White, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp))
-            // add padding for the rest of the content
             .padding(26.dp, 10.dp)
     ) {
         Spacer(modifier = Modifier.height(20.dp))
         WelcomeTextSection()
         Spacer(modifier = Modifier.height(20.dp))
-        // I want to change arrangement to centered at this point
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             LoginForm()
         }
@@ -216,7 +211,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit){
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        LoginActions(onLoginSuccess)
+        LoginActions(navController)
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -230,6 +225,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit){
         }
     }
 }
+
 
 @Composable
 fun TopNavigationBar() {
@@ -280,17 +276,23 @@ fun WelcomeTextSection() {
 }
 
 @Composable
-fun LoginActions(onLoginSuccess: () -> Unit) {
+fun LoginActions(navController: NavController) {
     Column {
-        TextButton(onClick = { /*ToDo*/ }, contentPadding = PaddingValues(0.dp)) {
+        TextButton(
+            onClick = { navController.navigate(BamaScreens.ForgotPasswordPage.name) },
+            contentPadding = PaddingValues(0.dp)
+        ) {
             Text(
                 text = "Wachtwoord vergeten?", fontSize = 16.sp, color = Green
             )
         }
         Button(
-            onClick = onLoginSuccess, colors = ButtonDefaults.buttonColors(
+            onClick = { navController.navigate(BamaScreens.ActivitiesPage.name) },
+            colors = ButtonDefaults.buttonColors(
                 containerColor = Green, contentColor = Color.White
-            ), shape = RoundedCornerShape(8.dp), modifier = Modifier.fillMaxWidth()
+            ),
+            shape = RoundedCornerShape(8.dp),
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text(
                 text = "Inloggen", fontSize = 28.sp
@@ -314,6 +316,8 @@ fun LoginActions(onLoginSuccess: () -> Unit) {
         }
     }
 }
+
+
 
 @Composable
 fun SignUpPrompt() {

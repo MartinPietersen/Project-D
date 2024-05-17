@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 
 enum class BamaScreens(@StringRes val title: Int) {
     Login(title = R.string.login),
-    Activities(title = R.string.activities_page),
+    ActivitiesPage(title = R.string.activities_page),
     ForgotPasswordPage(title = R.string.forgot_password_page),
     ActivityDetails(title = R.string.activity_details)
 }
@@ -103,37 +103,20 @@ enum class BamaScreens(@StringRes val title: Int) {
 @Composable
 fun BAMAApp(
     navController: NavHostController = rememberNavController()
-){
-    // Get current back stack entry
-    val backStackEntry by navController.currentBackStackEntryAsState()
-    // Get the name of the current screen
-    val currentScreen = BamaScreens.valueOf(
-        backStackEntry?.destination?.route ?: BamaScreens.Login.name
-    )
-
+) {
     NavHost(
         navController = navController,
         startDestination = BamaScreens.Login.name
     ) {
         composable(route = BamaScreens.Login.name) {
-            LoginScreen {
-                navController.navigate(BamaScreens.Activities.name)
-            }
+            LoginPage(navController)
         }
-        composable(route = BamaScreens.Activities.name) {
-            ActivitiesScreen()
+        composable(route = BamaScreens.ActivitiesPage.name) {
+            ActivitiesPage()
         }
-//        composable(
-//            route = "${BamaScreens.ActivityDetails.name}/{activityId}",
-//            arguments = listOf(navArgument("activityId") { type = NavType.IntType })
-//        ) { backStackEntry ->
-//            val activityId = backStackEntry.arguments?.getInt("activityId")
-//            ActivityDetailsScreen(
-//                activityId = activityId ?: 0,
-//                onBackClicked = {
-//                    navController.popBackStack()
-//                }
-//            )
-//        }
+        composable(route = BamaScreens.ForgotPasswordPage.name) {
+            ForgotPasswordPage()
+        }
     }
 }
+

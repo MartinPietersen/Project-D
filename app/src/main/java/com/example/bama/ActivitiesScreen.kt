@@ -56,7 +56,7 @@ import com.example.bama.ui.theme.WhiteBroken
 
 @Composable
 @Preview
-fun ActivitiesScreen() {
+fun ActivitiesPage() {
     var selectedButtonIndex by remember { mutableStateOf(0) }
 
     val onValueChange: (Int) -> Unit = { index ->

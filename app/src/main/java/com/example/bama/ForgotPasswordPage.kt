@@ -161,13 +161,13 @@ fun ForgotPasswordActions(sendEmailClicked: () -> Unit) {
 fun BackButtonForgotPassword(onBackClick: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.Start,
-        modifier = Modifier.padding(26.dp),
+        modifier = Modifier.padding(20.dp),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .clickable(onClick = onBackClick)
-                .padding(8.dp) // Optional padding to make it easier to click,
+                .padding(8.dp)
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
@@ -175,7 +175,7 @@ fun BackButtonForgotPassword(onBackClick: () -> Unit) {
                 tint = Color.White,
                 modifier = Modifier.size(32.dp)
             )
-            Spacer(modifier = Modifier.width(8.dp)) // optional, to add some space between icon and text
+            Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = "Terug",
                 color = Color.White,
