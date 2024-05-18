@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -47,6 +46,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.bama.ui.theme.Gray
 import com.example.bama.ui.theme.GrayDark
 import com.example.bama.ui.theme.Green
@@ -55,8 +56,7 @@ import com.example.bama.ui.theme.WhiteBroken
 
 
 @Composable
-@Preview
-fun ActivitiesPage() {
+fun ActivitiesPage(navController: NavHostController) {
     var selectedButtonIndex by remember { mutableStateOf(0) }
 
     val onValueChange: (Int) -> Unit = { index ->
@@ -89,13 +89,12 @@ fun ActivitiesPage() {
                 Column {
                     ActivitiesStatusBar(selectedButtonIndex, onValueChange)
                     Spacer(modifier = Modifier.height(8.dp))
-                    UpcomingActivities()
+                    UpcomingActivities(navController)
                     ActivityGrid(Modifier.padding(it))
                 }
             }
         },
         bottomBar = {
-            NavBarButtons()
         }
     )
 }
@@ -122,7 +121,7 @@ private fun Modifier.drawOvalsBehind(): Modifier {
 }
 
 @Composable
-fun UpcomingActivities() {
+fun UpcomingActivities(navController: NavHostController) {
     Column(
         modifier = Modifier.padding()
     ) {
@@ -145,7 +144,7 @@ fun UpcomingActivities() {
         }
         LazyRow() {
             item {
-                Button(onClick = { /*TODO*/ }) {
+                Button(onClick = { navController.navigate(BamaScreens.ActivityDetails.name) }) {
                     Text(text = "Activiteit 1")
                 }
                 Button(onClick = { /*TODO*/ }) {
