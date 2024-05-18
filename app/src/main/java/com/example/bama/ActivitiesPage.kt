@@ -99,7 +99,7 @@ fun ActivitiesPage(navController: NavHostController) {
     )
 }
 
-private fun Modifier.drawOvalsBehind(): Modifier {
+internal fun Modifier.drawOvalsBehind(): Modifier {
     return drawBehind {
         drawOval(
             color = Color(0xFFFFFFFF).copy(alpha = 0.25f), topLeft = Offset(
