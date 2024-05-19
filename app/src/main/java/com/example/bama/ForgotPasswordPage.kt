@@ -30,11 +30,11 @@ import com.example.bama.ui.theme.Green
 
 
 @Composable
-@Preview
+//@Preview
 fun ForgotPasswordPage(navController: NavHostController) {
 
     BackgroundCanvas()
-    BackButtonForgotPassword(onBackClick = { /*TODO*/ })
+    BackButtonForgotPassword(navController::popBackStack)
 
     Column(
         modifier = Modifier
