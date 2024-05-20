@@ -95,7 +95,6 @@ fun OverlayedOvals() {
     }
 }
 
-
 @Composable
 fun RememberButton() {
     var rememberMe by remember { mutableStateOf(false) }
@@ -121,7 +120,6 @@ fun RememberButton() {
                 .padding(0.dp, 0.dp, 10.dp, 0.dp))
     }
 }
-
 
 @Composable
 fun LoginForm() {
