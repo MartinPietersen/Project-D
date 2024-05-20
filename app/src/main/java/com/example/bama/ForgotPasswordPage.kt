@@ -24,24 +24,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.bama.ui.theme.GrayDark
 import com.example.bama.ui.theme.GrayLight
 import com.example.bama.ui.theme.Green
 
 
 @Composable
-@Preview
-fun ForgotPasswordPage(navController: NavHostController = rememberNavController()) {
+fun ForgotPasswordPage(navController: NavHostController) {
 
     BackgroundCanvas()
-    BackButtonForgotPassword(onBackClick = { /*TODO*/ })
+    BackButtonForgotPassword(navController::popBackStack)
 
     Column(
         modifier = Modifier
+            // first fill screen
             .fillMaxSize()
+            // Reveal the background canvas
             .padding(0.dp, 150.dp, 0.dp, 0.dp)
+            // colour the rest of the screen white
             .background(Color.White, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp))
+            // add padding for the rest of the content
             .padding(26.dp, 10.dp)
     ) {
         Spacer(modifier = Modifier.height(50.dp))
@@ -147,31 +149,27 @@ fun ForgotPasswordActions(sendEmailClicked: () -> Unit) {
 
 @Composable
 fun BackButtonForgotPassword(onBackClick: () -> Unit) {
-    Column(
-        horizontalAlignment = Alignment.Start,
-        modifier = Modifier.padding(20.dp),
+    Spacer(Modifier.height(5.dp))
+    Button(
+        modifier = Modifier.background(Green, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp)),
+        onClick = onBackClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Green, contentColor = Color.White
+        )
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .clickable(onClick = onBackClick)
-                .padding(8.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Back",
-                tint = Color.White,
-                modifier = Modifier.size(32.dp)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = "Terug",
-                color = Color.White,
-                fontFamily = FontFamily.Default,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                letterSpacing = 1.sp
-            )
-        }
+        Icon(
+            imageVector = Icons.Default.ArrowBack,
+            contentDescription = "Back",
+            tint = Color.White,
+            modifier = Modifier.size(32.dp)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = "Terug",
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            letterSpacing = 1.sp
+        )
     }
 }
