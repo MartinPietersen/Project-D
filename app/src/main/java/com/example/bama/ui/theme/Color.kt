@@ -12,6 +12,7 @@ val Pink40 = Color(0xFF7D5260)
 
 val GrayDark = Color(0xFF444444)
 val GrayLight = Color(0xFF999999)
+val GrayLighter = Color(0xFFBBBBBB)
 val Gray = Color(0xFF666666)
 
 val Green = Color(0xFF107200)
@@ -20,3 +21,4 @@ val GreenLight2 = Color(0xFF138A5A)
 val GreenDark = Color(0xFF004D00)
 
 val WhiteBroken = Color(0xFFE9E9E9)
+val WhiteBroken2 = Color(0xFFE0E0E0)

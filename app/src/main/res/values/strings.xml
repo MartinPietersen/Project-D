@@ -1,4 +1,5 @@
 <resources>
+    <string name="home_page">Home</string>
     <string name="app_name">BAMA</string>
     <string name="login">Inloggen</string>
     <string name="activities_page">Activiteiten</string>

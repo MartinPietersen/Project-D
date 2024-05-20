@@ -50,9 +50,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.bama.ui.theme.Gray
 import com.example.bama.ui.theme.GrayDark
+import com.example.bama.ui.theme.GrayLight
 import com.example.bama.ui.theme.Green
 import com.example.bama.ui.theme.NavBarButtons
 import com.example.bama.ui.theme.WhiteBroken
+import com.example.bama.ui.theme.drawOvalsBehind
 
 
 @Composable
@@ -68,7 +70,11 @@ fun ActivitiesPage(navController: NavHostController) {
         },
         content = {
             var padding by remember { mutableStateOf(it) }
-            Column {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(0.dp, 0.dp, 0.dp, 50.dp)
+            ) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -77,7 +83,7 @@ fun ActivitiesPage(navController: NavHostController) {
                             color = Green,
                             shape = RoundedCornerShape(bottomEnd = 55.dp)
                         )
-                        .drawOvalsBehind()
+                        .drawOvalsBehind(GrayLight)
                 )
                 {
                     Column {
@@ -95,47 +101,9 @@ fun ActivitiesPage(navController: NavHostController) {
             }
         },
         bottomBar = {
+            NavBarButtons(navController)
         }
     )
-}
-
-internal fun Modifier.drawOvalsBehind(): Modifier {
-    return drawBehind {
-        drawOval(
-            color = WhiteBroken.copy(alpha = 0.25f), topLeft = Offset(
-                x = size.width - 80.dp.toPx(), y = -50.dp.toPx()
-            ), size = Size(
-                width = 180.dp.toPx(), height = 180.dp.toPx()
-            )
-        )
-
-        // Small circle above the big circle
-        drawOval(
-            color = WhiteBroken.copy(alpha = 0.25f), topLeft = Offset(
-                x = size.width - 150.dp.toPx(), y = -90.dp.toPx()
-            ), size = Size(
-                width = 130.dp.toPx(), height = 130.dp.toPx()
-            )
-        )
-
-        // Small circle below the big circle to the right
-        drawOval(
-            color = WhiteBroken.copy(alpha = 0.25f), topLeft = Offset(
-                x = size.width - 40.dp.toPx(), y = 250.dp.toPx()
-            ), size = Size(
-                width = 130.dp.toPx(), height = 130.dp.toPx()
-            )
-        )
-
-        //Big circle left side of the screen
-        drawOval(
-            color = WhiteBroken.copy(alpha = 0.25f), topLeft = Offset(
-                x = -110.dp.toPx(), y = 110.dp.toPx()
-            ), size = Size(
-                width = 220.dp.toPx(), height = 220.dp.toPx()
-            )
-        )
-    }
 }
 
 @Composable

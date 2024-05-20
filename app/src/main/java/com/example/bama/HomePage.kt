@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +23,8 @@ import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -33,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -44,7 +48,10 @@ import com.example.bama.ui.theme.Green
 import com.example.bama.ui.theme.GreenDark
 import com.example.bama.ui.theme.GreenLight
 import com.example.bama.ui.theme.GreenLight2
+import com.example.bama.ui.theme.NavBarButtons
 import com.example.bama.ui.theme.WhiteBroken
+import com.example.bama.ui.theme.WhiteBroken2
+import com.example.bama.ui.theme.drawOvalsBehind
 
 @Composable
 @Preview
@@ -56,6 +63,7 @@ fun HomePage(navHostController: NavHostController = rememberNavController()) {
     val widthDP = configuration.screenWidthDp
 
     Scaffold(
+
         containerColor = WhiteBroken,
         topBar = {
 
@@ -87,14 +95,99 @@ fun HomePage(navHostController: NavHostController = rememberNavController()) {
                         item {
                             CardWithStatButtons()
                         }
+
+                        item {
+                            Text(
+                                text = "Uw aankomende activiteiten",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black,
+                                modifier = Modifier.padding(0.dp)
+                            )
+                        }
+
+                        item {
+                            RowWithImageAndDate()
+                        }
+
                     }
 
                 }
             }
         },
 
-        bottomBar = {}
+        bottomBar = {
+            NavBarButtons(navHostController)
+        }
     )
+}
+
+@Composable
+fun RowWithImageAndDate() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(0.dp, 0.dp, 0.dp, 60.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Button(onClick = { /*TODO*/ },
+            modifier = Modifier
+                .wrapContentHeight()
+                .weight(1f)
+                .padding(8.dp)
+                .aspectRatio(1f),
+            contentPadding = PaddingValues(0.dp),
+            shape = RoundedCornerShape(16.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Transparent
+            )
+        ){
+            Box (){
+                LoadImage(
+                    url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0mOQVttmkxHuaD54ffOg3X8MnCL77DxplO4aiI-iWiQ&s",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1f)
+                )
+
+                Text(
+                    text = "De Goudse Wandeling",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = WhiteBroken,
+                    modifier = Modifier.padding(8.dp).align(Alignment.BottomStart)
+                )
+            }
+        }
+        Button(onClick = { /*TODO*/ },
+            modifier = Modifier
+                .wrapContentHeight()
+                .weight(1f)
+                .padding(8.dp)
+                .aspectRatio(1f),
+            contentPadding = PaddingValues(0.dp),
+            shape = RoundedCornerShape(16.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Green
+            )){
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ){
+                Text(
+                    text = "Woensdag 6 juni",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = WhiteBroken,
+                    modifier = Modifier.padding(8.dp).align(Alignment.TopStart)
+                )
+                Text(
+                    text = "14:00 - 16:00",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = WhiteBroken,
+                    modifier = Modifier.padding(8.dp).align(Alignment.BottomStart)
+                )
+            }
+        }
+    }
 }
 
 @Composable
@@ -105,11 +198,19 @@ fun CardWithStatButtons() {
             .fillMaxWidth()
             .wrapContentHeight(),
         shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = WhiteBroken2
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 8.dp
+        )
     ) {
         Text(
             text = "Uw Statistieken",
             style = MaterialTheme.typography.titleMedium,
-            color = Color.Black
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            modifier = Modifier.padding(8.dp, 8.dp, 0.dp, 0.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
         Row(
@@ -182,18 +283,20 @@ fun ButtonWithActivityStats(
     ) {
 
         Box(
-            modifier = Modifier.fillMaxSize()
-        ){
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+        ) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 tint = WhiteBroken,
-//                modifier = Modifier.align(Alignment.Top)
             )
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier
+                    .padding(16.dp)
                     .align(Alignment.Center)
             ) {
                 Spacer(modifier = Modifier.height(8.dp))
