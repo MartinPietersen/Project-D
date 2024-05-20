@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.bama.ui.theme.GrayDark
 import com.example.bama.ui.theme.GrayLight
 import com.example.bama.ui.theme.Green
@@ -31,20 +32,16 @@ import com.example.bama.ui.theme.Green
 
 @Composable
 @Preview
-fun ForgotPasswordPage(navController: NavHostController) {
+fun ForgotPasswordPage(navController: NavHostController = rememberNavController()) {
 
     BackgroundCanvas()
     BackButtonForgotPassword(onBackClick = { /*TODO*/ })
 
     Column(
         modifier = Modifier
-            // first fill screen
             .fillMaxSize()
-            // Reveal the background canvas
             .padding(0.dp, 150.dp, 0.dp, 0.dp)
-            // colour the rest of the screen white
             .background(Color.White, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp))
-            // add padding for the rest of the content
             .padding(26.dp, 10.dp)
     ) {
         Spacer(modifier = Modifier.height(50.dp))

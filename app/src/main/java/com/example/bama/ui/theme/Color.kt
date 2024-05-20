@@ -15,7 +15,8 @@ val GrayLight = Color(0xFF999999)
 val Gray = Color(0xFF666666)
 
 val Green = Color(0xFF107200)
-val GreenLight = Color(0xFFD6FFC5)
+val GreenLight = Color(0xFF4CAF50)
+val GreenLight2 = Color(0xFF138A5A)
 val GreenDark = Color(0xFF004D00)
 
 val WhiteBroken = Color(0xFFE9E9E9)

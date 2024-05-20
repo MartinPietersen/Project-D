@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
@@ -66,6 +67,7 @@ fun ActivityInformationScreen(navHostController: NavHostController = rememberNav
         topBar = {
             // Back button
             ElevatedButton(
+
                 onClick = { navHostController.popBackStack() },
                 modifier = Modifier
                     .padding(16.dp),
@@ -82,11 +84,14 @@ fun ActivityInformationScreen(navHostController: NavHostController = rememberNav
                 )
 
             ) {
+                // I want the icon at the right side of the screen
+                // I should change the alignment of the icon
+
                 Icon(
-                    imageVector = Icons.Filled.ArrowBack,
+                    imageVector = Icons.Default.Close,
                     contentDescription = "Back",
                 )
-                Text("Vorige", style = MaterialTheme.typography.titleMedium)
+//                Text("Vorige", style = MaterialTheme.typography.titleMedium)
             }
         },
         content = {

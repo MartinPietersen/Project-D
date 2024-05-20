@@ -102,19 +102,37 @@ fun ActivitiesPage(navController: NavHostController) {
 internal fun Modifier.drawOvalsBehind(): Modifier {
     return drawBehind {
         drawOval(
-            color = Color(0xFFFFFFFF).copy(alpha = 0.25f), topLeft = Offset(
-                x = size.width - 100.dp.toPx(), y = -50.dp.toPx()
+            color = WhiteBroken.copy(alpha = 0.25f), topLeft = Offset(
+                x = size.width - 80.dp.toPx(), y = -50.dp.toPx()
             ), size = Size(
-                width = 200.dp.toPx(), height = 200.dp.toPx()
+                width = 180.dp.toPx(), height = 180.dp.toPx()
             )
         )
 
         // Small circle above the big circle
         drawOval(
-            color = Color(0xFFFFFFFF).copy(alpha = 0.25f), topLeft = Offset(
+            color = WhiteBroken.copy(alpha = 0.25f), topLeft = Offset(
                 x = size.width - 150.dp.toPx(), y = -90.dp.toPx()
             ), size = Size(
                 width = 130.dp.toPx(), height = 130.dp.toPx()
+            )
+        )
+
+        // Small circle below the big circle to the right
+        drawOval(
+            color = WhiteBroken.copy(alpha = 0.25f), topLeft = Offset(
+                x = size.width - 40.dp.toPx(), y = 250.dp.toPx()
+            ), size = Size(
+                width = 130.dp.toPx(), height = 130.dp.toPx()
+            )
+        )
+
+        //Big circle left side of the screen
+        drawOval(
+            color = WhiteBroken.copy(alpha = 0.25f), topLeft = Offset(
+                x = -110.dp.toPx(), y = 110.dp.toPx()
+            ), size = Size(
+                width = 220.dp.toPx(), height = 220.dp.toPx()
             )
         )
     }
@@ -199,7 +217,6 @@ fun WhiteBackGround() {
                 color = WhiteBroken
             )
     )
-
 }
 
 @Composable
