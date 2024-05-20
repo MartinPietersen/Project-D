@@ -11,7 +11,8 @@ enum class BamaScreens(@StringRes val title: Int) {
     Login(title = R.string.login),
     ActivitiesPage(title = R.string.activities_page),
     ForgotPasswordPage(title = R.string.forgot_password_page),
-    ActivityDetails(title = R.string.activity_details)
+    ActivityDetails(title = R.string.activity_details),
+    CreateNewAccount(title = R.string.create_new_account)
 }
 
 @Composable
@@ -34,6 +35,9 @@ fun BAMAApp(
         // dialog destinations are used
         composable(route = BamaScreens.ActivityDetails.name) {
             ActivityInformationScreen(navController)
+        }
+        composable(route = BamaScreens.CreateNewAccount.name) {
+            CreateNewAccount(navController)
         }
     }
 }

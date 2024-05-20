@@ -219,7 +219,7 @@ fun LoginPage(navController: NavController) {
                 .fillMaxHeight(),
             contentAlignment = Alignment.BottomCenter
         ) {
-            SignUpPrompt()
+            SignUpPrompt(navController)
         }
     }
 }
@@ -298,7 +298,7 @@ fun LoginActions(navController: NavController) {
         }
         Spacer(Modifier.height(10.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { /*ToDo*/ },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.White,
                 contentColor = Green,
@@ -318,10 +318,10 @@ fun LoginActions(navController: NavController) {
 
 
 @Composable
-fun SignUpPrompt() {
+fun SignUpPrompt(navController: NavController) {
     val interactionSource = remember { MutableInteractionSource() }
     TextButton(
-        onClick = { /* Handle sign up */ },
+        onClick = { navController.navigate(BamaScreens.CreateNewAccount.name) },
         modifier = Modifier.indication(interactionSource, indication = null)
 
     ) {

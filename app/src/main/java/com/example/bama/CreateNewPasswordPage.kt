@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -53,7 +52,7 @@ fun CreateNewPassword(navController: NavHostController = rememberNavController()
                     EnterNewPasswordForm()
                 }
                 Spacer(modifier = Modifier.height(150.dp))
-                CreateNewPasswordActions(sendEmailClicked = { /*TODO*/ })
+                CreateNewPasswordActions(SaveClicked = { /*TODO*/ })
             }
         },
         bottomBar = {}
@@ -64,7 +63,7 @@ fun CreateNewPassword(navController: NavHostController = rememberNavController()
 fun EnterNewPasswordSection() {
     Column {
         Text(
-            "Nieuw Wachtwoord",
+            "Nieuw wachtwoord",
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp
@@ -77,7 +76,8 @@ fun EnterNewPasswordSection() {
 
 @Composable
 fun EnterNewPasswordForm() {
-    var email by remember { mutableStateOf("") }
+    var wachtwoord by remember { mutableStateOf("") }
+    var wachtwoordAck by remember { mutableStateOf("") }
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -88,8 +88,8 @@ fun EnterNewPasswordForm() {
         OutlinedTextField(
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.fillMaxWidth(),
-            value = email,
-            onValueChange = { email = it },
+            value = wachtwoord,
+            onValueChange = { wachtwoord = it },
             placeholder = {
                 Row {
                     Icon(
@@ -112,8 +112,8 @@ fun EnterNewPasswordForm() {
         OutlinedTextField(
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.fillMaxWidth(),
-            value = email,
-            onValueChange = { email = it },
+            value = wachtwoordAck,
+            onValueChange = { wachtwoordAck = it },
             placeholder = {
                 Row {
                     Icon(
@@ -136,10 +136,10 @@ fun EnterNewPasswordForm() {
 }
 
 @Composable
-fun CreateNewPasswordActions(sendEmailClicked: () -> Unit) {
+fun CreateNewPasswordActions(SaveClicked: () -> Unit) {
     Column {
         Button(
-            onClick = sendEmailClicked,
+            onClick = SaveClicked,
             colors = ButtonDefaults.buttonColors(
                 containerColor = Green, contentColor = Color.White
             ),

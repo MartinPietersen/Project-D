@@ -4,4 +4,5 @@
     <string name="activities_page">Activiteiten</string>
     <string name="activity_details">ActiviteitDetails</string>
     <string name="forgot_password_page">WachtwoordVergeten</string>
+    <string name="create_new_account">Registreren</string>
 </resources>
