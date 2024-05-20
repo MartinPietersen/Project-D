@@ -3,7 +3,6 @@ package com.example.bama
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -27,39 +26,37 @@ import androidx.navigation.NavHostController
 import com.example.bama.ui.theme.GrayDark
 import com.example.bama.ui.theme.GrayLight
 import com.example.bama.ui.theme.Green
-
+import com.example.bama.ui.theme.WhiteBroken
 
 @Composable
 fun ForgotPasswordPage(navController: NavHostController) {
-
-    BackgroundCanvas()
-    BackButtonForgotPassword(navController::popBackStack)
-
-    Column(
-        modifier = Modifier
-            // first fill screen
-            .fillMaxSize()
-            // Reveal the background canvas
-            .padding(0.dp, 150.dp, 0.dp, 0.dp)
-            // colour the rest of the screen white
-            .background(Color.White, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp))
-            // add padding for the rest of the content
-            .padding(26.dp, 10.dp)
-    ) {
-        Spacer(modifier = Modifier.height(50.dp))
-
-        ForgotPasswordSection()
-
-        Spacer(modifier = Modifier.height(100.dp))
-        // I want to change arrangement to centered at this point
-        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-            EnterEmailForm()
-        }
-
-        Spacer(modifier = Modifier.height(150.dp))
-
-        ForgotPasswordActions(sendEmailClicked = { /*TODO*/ } )
-    }
+    Scaffold(
+        containerColor = WhiteBroken,
+        topBar = {
+            BackButtonForgotPassword(navController::popBackStack)
+        },
+        content = {
+            val padding = it
+            BackgroundCanvas()
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 150.dp)
+                    .background(Color.White, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp))
+                    .padding(26.dp)
+            ) {
+                Spacer(modifier = Modifier.height(50.dp))
+                ForgotPasswordSection()
+                Spacer(modifier = Modifier.height(100.dp))
+                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    EnterEmailForm()
+                }
+                Spacer(modifier = Modifier.height(150.dp))
+                ForgotPasswordActions(sendEmailClicked = { /*TODO*/ })
+            }
+        },
+        bottomBar = {}
+    )
 }
 
 @Composable
@@ -69,8 +66,7 @@ fun ForgotPasswordSection() {
             "Wachtwoord vergeten",
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
-//            modifier = Modifier.padding(16.dp)
+            fontSize = 24.sp
         )
         Text(
             "Vul hieronder uw email in voor een nieuw wachtwoord", style = MaterialTheme.typography.bodyMedium
@@ -81,7 +77,6 @@ fun ForgotPasswordSection() {
 @Composable
 fun EnterEmailForm() {
     var email by remember { mutableStateOf("") }
-
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -101,9 +96,7 @@ fun EnterEmailForm() {
                         tint = GrayDark
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        "Vul uw email-adres in", color = GrayDark
-                    )
+                    Text("Vul uw email-adres in", color = GrayDark)
                 }
             },
             colors = OutlinedTextFieldDefaults.colors(
@@ -120,13 +113,14 @@ fun EnterEmailForm() {
 fun ForgotPasswordActions(sendEmailClicked: () -> Unit) {
     Column {
         Button(
-            onClick = sendEmailClicked, colors = ButtonDefaults.buttonColors(
+            onClick = sendEmailClicked,
+            colors = ButtonDefaults.buttonColors(
                 containerColor = Green, contentColor = Color.White
-            ), shape = RoundedCornerShape(8.dp), modifier = Modifier.fillMaxWidth()
+            ),
+            shape = RoundedCornerShape(8.dp),
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Text(
-                text = "Verstuur e-mail", fontSize = 28.sp
-            )
+            Text(text = "Verstuur e-mail", fontSize = 28.sp)
         }
         Spacer(Modifier.height(10.dp))
         Button(
@@ -140,18 +134,15 @@ fun ForgotPasswordActions(sendEmailClicked: () -> Unit) {
                 .border(2.dp, Green, RoundedCornerShape(8.dp))
                 .fillMaxWidth()
         ) {
-            Text(
-                text = "Hulp nodig", fontSize = 28.sp
-            )
+            Text(text = "Hulp nodig", fontSize = 28.sp)
         }
     }
 }
 
 @Composable
 fun BackButtonForgotPassword(onBackClick: () -> Unit) {
-    Spacer(Modifier.height(5.dp))
     Button(
-        modifier = Modifier.background(Green, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp)),
+        modifier = Modifier.background(Green, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp)).padding(top = 8.dp),
         onClick = onBackClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = Green, contentColor = Color.White
