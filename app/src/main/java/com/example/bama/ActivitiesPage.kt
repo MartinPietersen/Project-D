@@ -83,7 +83,7 @@ fun ActivitiesPage(navController: NavHostController) {
                             color = Green,
                             shape = RoundedCornerShape(bottomEnd = 55.dp)
                         )
-                        .drawOvalsBehind(GrayLight)
+                        .drawOvalsBehind()
                 )
                 {
                     Column {

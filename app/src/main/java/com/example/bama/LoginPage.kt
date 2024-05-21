@@ -285,7 +285,7 @@ fun LoginActions(navController: NavController) {
             )
         }
         Button(
-            onClick = { navController.navigate(BamaScreens.ActivitiesPage.name) },
+            onClick = { navController.navigate(BamaScreens.HomePage.name) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Green, contentColor = Color.White
             ),

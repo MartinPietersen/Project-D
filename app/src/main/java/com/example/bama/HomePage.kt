@@ -52,6 +52,7 @@ import com.example.bama.ui.theme.NavBarButtons
 import com.example.bama.ui.theme.WhiteBroken
 import com.example.bama.ui.theme.WhiteBroken2
 import com.example.bama.ui.theme.drawOvalsBehind
+import com.example.bama.ui.theme.drawOvalsBehindHome
 
 @Composable
 @Preview
@@ -307,7 +308,7 @@ fun ButtonWithActivityStats(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = number.toString(),
+                    text = number,
                     color = WhiteBroken,
                     style = MaterialTheme.typography.titleMedium
                 )
@@ -384,7 +385,7 @@ fun GreenRoundedRectangle(heightDP: Int) {
             .fillMaxWidth()
             .height((heightDP * 0.5).dp)
             .background(Green, shape = RoundedCornerShape(0.dp, 0.dp, 50.dp, 0.dp))
-            .drawOvalsBehind()
+            .drawOvalsBehindHome()
     )
 
 }

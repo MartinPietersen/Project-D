@@ -63,7 +63,9 @@ fun NavBarButtons(navHostController: NavHostController) {
                 }
             }
             Button(
-                onClick = {},
+                onClick = {
+                    navigateTo(navHostController, "ChatPage")
+                },
                 modifier = Modifier.weight(0.30f),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = WhiteBroken,
@@ -140,7 +142,27 @@ internal fun Modifier.drawOvalsBehind(color: Color = WhiteBroken): Modifier {
                 width = 130.dp.toPx(), height = 130.dp.toPx()
             )
         )
+    }
+}
 
+internal fun Modifier.drawOvalsBehindHome(color: Color = WhiteBroken): Modifier {
+    return drawBehind {
+        drawOval(
+            color = color.copy(alpha = 0.25f), topLeft = Offset(
+                x = size.width - 80.dp.toPx(), y = -50.dp.toPx()
+            ), size = Size(
+                width = 180.dp.toPx(), height = 180.dp.toPx()
+            )
+        )
+
+        // Small circle above the big circle
+        drawOval(
+            color = color.copy(alpha = 0.25f), topLeft = Offset(
+                x = size.width - 150.dp.toPx(), y = -90.dp.toPx()
+            ), size = Size(
+                width = 130.dp.toPx(), height = 130.dp.toPx()
+            )
+        )
         // Small circle below the big circle to the right
         drawOval(
             color = color.copy(alpha = 0.25f), topLeft = Offset(
@@ -163,10 +185,9 @@ internal fun Modifier.drawOvalsBehind(color: Color = WhiteBroken): Modifier {
 
 fun navigateTo(navController: NavHostController, route: String) {
 
-    if (navController.previousBackStackEntry?.destination?.route == route){
+    if (navController.previousBackStackEntry?.destination?.route == route) {
         navController.popBackStack()
-    }
-    else if (navController.currentDestination?.route != route) {
+    } else if (navController.currentDestination?.route != route) {
         navController.navigate(route)
     }
 }
