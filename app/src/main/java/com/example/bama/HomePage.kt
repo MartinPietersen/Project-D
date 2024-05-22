@@ -108,7 +108,7 @@ fun HomePage(navHostController: NavHostController = rememberNavController()) {
                         }
 
                         item {
-                            RowWithImageAndDate()
+                            RowWithImageAndDate(navHostController)
                         }
 
                     }
@@ -124,7 +124,7 @@ fun HomePage(navHostController: NavHostController = rememberNavController()) {
 }
 
 @Composable
-fun RowWithImageAndDate() {
+fun RowWithImageAndDate(navHostController: NavHostController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -132,7 +132,7 @@ fun RowWithImageAndDate() {
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Button(onClick = { /*TODO*/ },
+        Button(onClick = { navHostController.navigate("ActivityDetails") },
             modifier = Modifier
                 .wrapContentHeight()
                 .weight(1f)
@@ -160,7 +160,7 @@ fun RowWithImageAndDate() {
                 )
             }
         }
-        Button(onClick = { /*TODO*/ },
+        Button(onClick = { navHostController.navigate("ActivityDetails") },
             modifier = Modifier
                 .wrapContentHeight()
                 .weight(1f)
@@ -297,14 +297,15 @@ fun ButtonWithActivityStats(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(8.dp, 16.dp)
                     .align(Alignment.Center)
             ) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = text,
                     color = WhiteBroken,
-                    style = MaterialTheme.typography.titleMedium
+                    style = MaterialTheme.typography.titleMedium,
+                    softWrap = false
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
