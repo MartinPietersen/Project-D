@@ -14,7 +14,8 @@ enum class BamaScreens(@StringRes val title: Int) {
     ActivityDetails(title = R.string.activity_details),
     CreateNewAccount(title = R.string.create_new_account),
     HomePage(title = R.string.home_page),
-    ChatPage(title = R.string.chat_page)
+    ChatPage(title = R.string.chat_page),
+    ChatOverviewPage(title = R.string.chat_overview_page)
 }
 
 @Composable
@@ -47,6 +48,9 @@ fun BAMAApp(
         }
         composable(route = BamaScreens.ChatPage.name) {
             ChatPage(navController)
+        }
+        composable(route = BamaScreens.ChatOverviewPage.name) {
+            ChatOverviewPage(navController)
         }
     }
 

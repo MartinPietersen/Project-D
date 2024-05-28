@@ -251,7 +251,7 @@ fun ChatPage(navController: NavHostController = rememberNavController()) {
             }
         },
         bottomBar = {
-            NavBarButtons(navController)
+//            NavBarButtons(navController)
         }
     )
 }

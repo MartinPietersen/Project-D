@@ -64,8 +64,8 @@ fun ActivitiesPage(navController: NavHostController) {
     val onValueChange: (Int) -> Unit = { index ->
         selectedButtonIndex = index
     }
-    WhiteBackGround()
     Scaffold(
+        containerColor = WhiteBroken,
         topBar = {
         },
         content = {
@@ -194,7 +194,7 @@ fun ActivitiesStatusBar(selectedButtonIndex: Int, onValueChange: (Int) -> Unit) 
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp, 8.dp),
+            .padding(8.dp, 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         ActivityStatusButton(

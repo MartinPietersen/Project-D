@@ -26,6 +26,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.bama.R
 
 
 @Composable
@@ -64,7 +65,7 @@ fun NavBarButtons(navHostController: NavHostController) {
             }
             Button(
                 onClick = {
-                    navigateTo(navHostController, "ChatPage")
+                    navigateTo(navHostController, "ChatOverviewPage")
                 },
                 modifier = Modifier.weight(0.30f),
                 colors = ButtonDefaults.buttonColors(

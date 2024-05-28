@@ -55,7 +55,6 @@ import com.example.bama.ui.theme.drawOvalsBehind
 import com.example.bama.ui.theme.drawOvalsBehindHome
 
 @Composable
-@Preview
 fun HomePage(navHostController: NavHostController = rememberNavController()) {
     // get the screen height
     // get the screen width
