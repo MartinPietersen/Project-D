@@ -1,5 +1,7 @@
 package com.example.bama
 
+import android.os.Handler
+import android.os.Looper
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,8 +21,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -50,14 +50,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.bama.ui.theme.GrayDark
 import com.example.bama.ui.theme.GrayLight
 import com.example.bama.ui.theme.Green
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.FormBody
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import okio.IOException
+import org.json.JSONException
+import org.json.JSONObject
+
+
 
 
 
@@ -95,6 +106,53 @@ fun OverlayedOvals() {
     }
 }
 
+
+
+private fun SendLoginApiRequest(email: String, password: String, callback: (Boolean) -> Unit) {
+    val client = OkHttpClient()
+
+    val jsonObject = JSONObject()
+    try {
+        jsonObject.put("email", email)
+        jsonObject.put("password", password)
+    } catch (e: JSONException) {
+        e.printStackTrace()
+        callback(false)
+        return
+    }
+    val mediaType = "application/json; charset=utf-8".toMediaType()
+    val body = jsonObject.toString().toRequestBody(mediaType)
+
+    val request = Request.Builder()
+        .url("https://api.bama-hsr-server.org/login")
+        .post(body)
+        .build()
+
+    client.newCall(request).enqueue(object: Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            e.printStackTrace()
+            Handler(Looper.getMainLooper()).post {
+                callback(false)
+            }
+        }
+        override fun onResponse(call: Call, response: Response) {
+            response.use {
+                if (!response.isSuccessful){
+                    Handler(Looper.getMainLooper()).post {
+                        callback(false)
+                    }
+                    return
+                }
+
+                Handler(Looper.getMainLooper()).post {
+                    callback(true)
+                }
+            }
+        }
+    })
+}
+
+
 @Composable
 fun RememberButton() {
     var rememberMe by remember { mutableStateOf(false) }
@@ -122,10 +180,7 @@ fun RememberButton() {
 }
 
 @Composable
-fun LoginForm() {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-
+fun LoginForm(email: String, onEmailChange: (String) -> Unit, password: String, onPasswordChange: (String) -> Unit) {
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -136,7 +191,7 @@ fun LoginForm() {
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.fillMaxWidth(),
             value = email,
-            onValueChange = { email = it },
+            onValueChange = onEmailChange,
             placeholder = {
                 Row {
                     Icon(
@@ -161,7 +216,7 @@ fun LoginForm() {
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.fillMaxWidth(),
             value = password,
-            onValueChange = { password = it },
+            onValueChange = onPasswordChange,
             placeholder = {
                 Row {
                     Icon(
@@ -190,6 +245,10 @@ fun LoginPage(navController: NavController) {
     BackgroundCanvas()
     TopNavigationBar()
 
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var loginFailed by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -198,10 +257,12 @@ fun LoginPage(navController: NavController) {
             .padding(26.dp, 10.dp)
     ) {
         Spacer(modifier = Modifier.height(20.dp))
+
+
         WelcomeTextSection()
         Spacer(modifier = Modifier.height(20.dp))
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-            LoginForm()
+            LoginForm(email = email, onEmailChange = { email = it }, password = password, onPasswordChange = { password = it })
         }
         Spacer(modifier = Modifier.height(5.dp))
 
@@ -209,7 +270,19 @@ fun LoginPage(navController: NavController) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        LoginActions(navController)
+        if (loginFailed) {
+            Text("Login failed. Please try again.", color = Color.Red, fontSize = 16.sp)
+        }
+
+
+        LoginActions(navController, email, password, onLoginResult = { success ->
+            if (success) {
+                navController.navigate(BamaScreens.HomePage.name)
+            } else {
+                loginFailed = true
+            }
+        })
+
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -274,7 +347,7 @@ fun WelcomeTextSection() {
 }
 
 @Composable
-fun LoginActions(navController: NavController) {
+fun LoginActions(navController: NavController, email: String, password: String, onLoginResult: (Boolean) -> Unit) {
     Column {
         TextButton(
             onClick = { navController.navigate(BamaScreens.ForgotPasswordPage.name) },
@@ -285,7 +358,11 @@ fun LoginActions(navController: NavController) {
             )
         }
         Button(
-            onClick = { navController.navigate(BamaScreens.HomePage.name) },
+            onClick = {
+                SendLoginApiRequest(email, password) { success ->
+                    onLoginResult(success)
+                }
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Green, contentColor = Color.White
             ),
