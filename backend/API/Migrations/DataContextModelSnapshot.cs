@@ -86,6 +86,7 @@ namespace API.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+<<<<<<< Updated upstream
             modelBuilder.Entity("ChatMessage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -105,15 +106,35 @@ namespace API.Migrations
 
                     b.Property<string>("SenderId")
                         .IsRequired()
+=======
+            modelBuilder.Entity("API.Model.UserCoins", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Coins")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+>>>>>>> Stashed changes
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
+<<<<<<< Updated upstream
                     b.HasIndex("RecipientId");
 
                     b.HasIndex("SenderId");
 
                     b.ToTable("ChatMessages");
+=======
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserCoins");
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -248,6 +269,7 @@ namespace API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+<<<<<<< Updated upstream
             modelBuilder.Entity("ChatMessage", b =>
                 {
                     b.HasOne("API.Model.User", "Recipient")
@@ -265,6 +287,15 @@ namespace API.Migrations
                     b.Navigation("Recipient");
 
                     b.Navigation("Sender");
+=======
+            modelBuilder.Entity("API.Model.UserCoins", b =>
+                {
+                    b.HasOne("API.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

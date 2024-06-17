@@ -2895,11 +2895,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< Updated upstream
       "projectUniqueName": "C:\\Users\\jaspe\\StudioProjects\\Project-D\\backend\\API\\API.csproj",
       "projectName": "API",
       "projectPath": "C:\\Users\\jaspe\\StudioProjects\\Project-D\\backend\\API\\API.csproj",
       "packagesPath": "C:\\Users\\jaspe\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\jaspe\\StudioProjects\\Project-D\\backend\\API\\obj\\",
+=======
+      "projectUniqueName": "/home/ron/Documents/hsr/Project-D/backend/API/API.csproj",
+      "projectName": "API",
+      "projectPath": "/home/ron/Documents/hsr/Project-D/backend/API/API.csproj",
+      "packagesPath": "/home/ron/.nuget/packages/",
+      "outputPath": "/home/ron/Documents/hsr/Project-D/backend/API/obj/",
+>>>>>>> Stashed changes
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
