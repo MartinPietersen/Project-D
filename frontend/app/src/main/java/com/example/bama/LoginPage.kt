@@ -106,8 +106,6 @@ fun OverlayedOvals() {
     }
 }
 
-
-
 private fun SendLoginApiRequest(email: String, password: String, callback: (Boolean) -> Unit) {
     val client = OkHttpClient()
 

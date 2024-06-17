@@ -2,7 +2,6 @@ package com.example.bama
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -27,24 +26,24 @@ import com.example.bama.ui.theme.WhiteBroken
 
 @Composable
 @Preview
-fun CreateNewAccount(navController: NavHostController = rememberNavController()) {
+fun CreateNewAccountTwo(navController: NavHostController = rememberNavController()) {
     Scaffold(
         containerColor = WhiteBroken,
         topBar = {
-            BackButtonCreateAccount(navController::popBackStack)
+            BackButtonCreateAccountTwo(navController::popBackStack)
         },
         content = {
             val padding = it
             BackgroundCanvas()
-            var firstName by remember { mutableStateOf("") }
-            var lastName by remember { mutableStateOf("") }
-            var age by remember { mutableStateOf("") }
-            var expanded by remember { mutableStateOf(false) }
+            var email by remember { mutableStateOf("") }
+            var password by remember { mutableStateOf("") }
+            var confirmedPassword by remember { mutableStateOf("") }
+            val passwordsMatch by remember { derivedStateOf { password == confirmedPassword } }
             var showError by remember { mutableStateOf(false) }
             var errorMessage by remember { mutableStateOf("") }
 
             if (showError) {
-                ErrorDialog(
+                ErrorDialogTwo(
                     errorMessage = errorMessage,
                     onDismiss = { showError = false }
                 )
@@ -58,36 +57,38 @@ fun CreateNewAccount(navController: NavHostController = rememberNavController())
                     .padding(26.dp)
             ) {
                 Spacer(modifier = Modifier.height(10.dp))
-                CreateNewAccountSection()
-                Spacer(modifier = Modifier.height(25.dp))
+                CreateNewAccountSectionTwo()
+                Spacer(modifier = Modifier.height(15.dp))
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    EnterDataForm(
-                        firstName = firstName,
-                        onFirstNameChange = { firstName = it },
-                        lastName = lastName,
-                        onLastNameChange = { lastName = it },
-                        age = age,
-                        onAgeChange = { age = it },
-                        expanded = expanded,
-                        onExpandedChange = { expanded = it }
+                    EnterDataFormTwo(
+                        email = email,
+                        onEmailChange = { email = it },
+                        password = password,
+                        onPasswordChange = { password = it },
+                        confirmedPassword = confirmedPassword,
+                        onConfirmedPasswordChange = { confirmedPassword = it },
+                        passwordsMatch = passwordsMatch
                     )
                 }
-                Spacer(modifier = Modifier.height(30.dp))
-                val isFormValid = firstName.isNotBlank() && lastName.isNotBlank() && age.isNotBlank()
-                CreateAccountActions(
+                Spacer(modifier = Modifier.height(10.dp))
+                val isFormValid = email.isNotBlank() && password.isNotBlank() && confirmedPassword.isNotBlank() && passwordsMatch
+                CreateAccountActionsTwo(
                     isFormValid = isFormValid,
-                    NextClicked = {
+                    CreateClicked = {
                         if (isFormValid) {
-                            if (firstName.all { it.isLetter() } && lastName.all { it.isLetter() }) {
-                                // Navigate to the next page
-                                navController.navigate(BamaScreens.CreateNewAccountTwo.name)
-                            } else {
+                            if (!isValidEmail(email)) {
                                 showError = true
-                                errorMessage = "Voornaam en achternaam mogen alleen letters bevatten"
+                                errorMessage = "Incorrect email adres"
                             }
-                        } else {
-                            showError = true
-                            errorMessage = "Alle velden moeten worden ingevuld"
+                            else if (!isValidPassword(password)) {
+                                showError = true
+                                errorMessage = "Wachtwoord moet minimaal 12 tot 30 karakters bevatten en minimaal 1 kleine letter, 1 grote letter, 1 speciaal karakter en 1 cijfer."
+                            }
+                            else {
+                                // Navigate to the next page
+
+                                navController.navigate(BamaScreens.Login.name)
+                            }
                         }
                     }
                 )
@@ -98,7 +99,7 @@ fun CreateNewAccount(navController: NavHostController = rememberNavController())
 }
 
 @Composable
-fun CreateNewAccountSection() {
+fun CreateNewAccountSectionTwo() {
     Column {
         Text(
             "Hallo daar",
@@ -113,30 +114,29 @@ fun CreateNewAccountSection() {
 }
 
 @Composable
-fun EnterDataForm(
-    firstName: String,
-    onFirstNameChange: (String) -> Unit,
-    lastName: String,
-    onLastNameChange: (String) -> Unit,
-    age: String,
-    onAgeChange: (String) -> Unit,
-    expanded: Boolean,
-    onExpandedChange: (Boolean) -> Unit
+fun EnterDataFormTwo(
+    email: String,
+    onEmailChange: (String) -> Unit,
+    password: String,
+    onPasswordChange: (String) -> Unit,
+    confirmedPassword: String,
+    onConfirmedPasswordChange: (String) -> Unit,
+    passwordsMatch: Boolean
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.Start,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(text = "Voornaam", color = GrayDark, fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Default)
+        Text(text = "Email", color = GrayDark, fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Default)
         OutlinedTextField(
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.fillMaxWidth(),
-            value = firstName,
-            onValueChange = onFirstNameChange,
+            value = email,
+            onValueChange = onEmailChange,
             placeholder = {
                 Row {
-                    Text("Vul uw voornaam in", color = Color.Black)
+                    Text("Vul uw email in", color = Color.Black)
                 }
             },
             colors = OutlinedTextFieldDefaults.colors(
@@ -146,15 +146,15 @@ fun EnterDataForm(
                 focusedContainerColor = Color.White
             )
         )
-        Text(text = "Achternaam", color = GrayDark, fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Default)
+        Text(text = "Wachtwoord", color = GrayDark, fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Default)
         OutlinedTextField(
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.fillMaxWidth(),
-            value = lastName,
-            onValueChange = onLastNameChange,
+            value = password,
+            onValueChange = onPasswordChange,
             placeholder = {
                 Row {
-                    Text("Vul uw achternaam in", color = Color.Black)
+                    Text("Vul uw wachtwoord in", color = Color.Black)
                 }
             },
             colors = OutlinedTextFieldDefaults.colors(
@@ -164,58 +164,40 @@ fun EnterDataForm(
                 focusedContainerColor = Color.White
             )
         )
-        Text(text = "Leeftijd", color = GrayDark, fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Default)
-        Box(modifier = Modifier.fillMaxWidth()) {
-            OutlinedTextField(
-                value = age,
-                onValueChange = {},
-                readOnly = true,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onExpandedChange(true) },
-                placeholder = { Text(text = "00", color = Color.Black) },
-                shape = RoundedCornerShape(8.dp),
-                trailingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.ArrowDropDown,
-                        contentDescription = null,
-                        modifier = Modifier.clickable { onExpandedChange(true) }
-                    )
-                },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = GrayLight,
-                    unfocusedBorderColor = Color.Transparent,
-                    unfocusedContainerColor = GrayLight,
-                    focusedContainerColor = Color.White
-                )
-            )
-
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { onExpandedChange(false) },
-                modifier = Modifier
-                    .background(Color.White)
-                    .width(55.dp)
-            ) {
-                (1..120).forEach { number ->
-                    DropdownMenuItem(
-                        onClick = {
-                            onAgeChange(number.toString())
-                            onExpandedChange(false)
-                        },
-                        text = { Text(text = number.toString(), fontSize = 16.sp) }
-                    )
+        Text(text = "Bevestig uw wachtwoord", color = GrayDark, fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Default)
+        OutlinedTextField(
+            shape = RoundedCornerShape(8.dp),
+            modifier = Modifier.fillMaxWidth(),
+            value = confirmedPassword,
+            onValueChange = onConfirmedPasswordChange,
+            placeholder = {
+                Row {
+                    Text("Vul uw wachtwoord nog een keer in", color = Color.Black)
                 }
-            }
+            },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = GrayLight,
+                unfocusedBorderColor = Color.Transparent,
+                unfocusedContainerColor = GrayLight,
+                focusedContainerColor = Color.White
+            )
+        )
+        if (password.isNotBlank() || confirmedPassword.isNotBlank()) {
+            Text(
+                text = if (passwordsMatch) "Wachtwoorden komen overeen" else "Wachtwoorden komen niet overeen",
+                color = if (passwordsMatch) Color.Green else Color.Red,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+            )
         }
     }
 }
 
 @Composable
-fun CreateAccountActions(isFormValid: Boolean, NextClicked: () -> Unit) {
+fun CreateAccountActionsTwo(isFormValid: Boolean, CreateClicked: () -> Unit) {
     Column {
         Button(
-            onClick = NextClicked,
+            onClick = CreateClicked,
             colors = ButtonDefaults.buttonColors(
                 containerColor = if (isFormValid) Green else Color.Gray,
                 contentColor = Color.White
@@ -224,7 +206,7 @@ fun CreateAccountActions(isFormValid: Boolean, NextClicked: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             enabled = isFormValid
         ) {
-            Text(text = "Volgende", fontSize = 28.sp)
+            Text(text = "Aanmaken", fontSize = 28.sp)
         }
         Spacer(Modifier.height(10.dp))
         Button(
@@ -244,7 +226,7 @@ fun CreateAccountActions(isFormValid: Boolean, NextClicked: () -> Unit) {
 }
 
 @Composable
-fun BackButtonCreateAccount(onBackClick: () -> Unit) {
+fun BackButtonCreateAccountTwo(onBackClick: () -> Unit) {
     Button(
         modifier = Modifier.background(Green, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp)).padding(top = 8.dp),
         onClick = onBackClick,
@@ -270,7 +252,7 @@ fun BackButtonCreateAccount(onBackClick: () -> Unit) {
 }
 
 @Composable
-fun ErrorDialog(errorMessage: String, onDismiss: () -> Unit) {
+fun ErrorDialogTwo(errorMessage: String, onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
@@ -285,4 +267,14 @@ fun ErrorDialog(errorMessage: String, onDismiss: () -> Unit) {
             Text(text = errorMessage)
         }
     )
+}
+
+fun isValidEmail(email: String): Boolean {
+    val emailRegex = Regex("""^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}${'$'}""")
+    return emailRegex.matches(email)
+}
+
+fun isValidPassword(password: String): Boolean {
+    val passwordRegex = Regex("""^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,30}${'$'}""")
+    return passwordRegex.matches(password)
 }

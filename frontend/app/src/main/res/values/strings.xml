@@ -6,6 +6,7 @@
     <string name="activity_details">ActiviteitDetails</string>
     <string name="forgot_password_page">WachtwoordVergeten</string>
     <string name="create_new_account">Registreren</string>
+    <string name="create_new_account_two">RegistrerenTwee</string>
     <string name="chat_page">Chat</string>
     <string name="chat_overview_page">ChatOverzicht</string>
 </resources>

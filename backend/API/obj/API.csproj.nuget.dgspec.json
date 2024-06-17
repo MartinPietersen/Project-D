@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/home/ron/RiderProjects/BamaAPI/API/API.csproj": {}
+    "C:\\Users\\jaspe\\StudioProjects\\Project-D\\backend\\API\\API.csproj": {}
   },
   "projects": {
-    "/home/ron/RiderProjects/BamaAPI/API/API.csproj": {
+    "C:\\Users\\jaspe\\StudioProjects\\Project-D\\backend\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ron/RiderProjects/BamaAPI/API/API.csproj",
+        "projectUniqueName": "C:\\Users\\jaspe\\StudioProjects\\Project-D\\backend\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "/home/ron/RiderProjects/BamaAPI/API/API.csproj",
-        "packagesPath": "/home/ron/.nuget/packages/",
-        "outputPath": "/home/ron/RiderProjects/BamaAPI/API/obj/",
+        "projectPath": "C:\\Users\\jaspe\\StudioProjects\\Project-D\\backend\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\jaspe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jaspe\\StudioProjects\\Project-D\\backend\\API\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/ron/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\jaspe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -80,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.105/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
