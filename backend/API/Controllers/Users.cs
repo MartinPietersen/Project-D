@@ -18,14 +18,14 @@ public class Users : ControllerBase
         _context = context;
     }
 
-    [HttpGet("users")]
+    [HttpGet("users")] // Get all users
     public IActionResult GetUsers()
     {
         var users = _context.Users.ToList();
         return Ok(users);
     }
 
-    [HttpGet("user/{id}")]
+    [HttpGet("user/{id}")] // Get a specific user
     public IActionResult GetUser(string id)
     {
         if (id == null)

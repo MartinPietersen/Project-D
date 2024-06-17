@@ -10,7 +10,7 @@ public static class PasswordHasher
     private static HashAlgorithmName AlgorithmName = HashAlgorithmName.SHA512;
     
     
-    public static byte[] HashPassword(string password, out byte[] salt)
+    public static byte[] HashPassword(string password, out byte[] salt) // Hash the password
     {
         salt = RandomNumberGenerator.GetBytes(KeySize);
 
@@ -20,7 +20,7 @@ public static class PasswordHasher
         return hash;
     }
 
-    public static bool VerifiyPassword(string password, byte[] hash, byte[] salt)
+    public static bool VerifiyPassword(string password, byte[] hash, byte[] salt) // Verify the password
     {
         var compare = Rfc2898DeriveBytes.Pbkdf2(password, salt, Iterations, AlgorithmName, KeySize);
 

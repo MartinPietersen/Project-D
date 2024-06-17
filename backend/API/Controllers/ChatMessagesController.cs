@@ -16,14 +16,14 @@ public class ChatMessagesController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("messages")]   
-    public IActionResult GetMessages()
+    [HttpGet("messages")]
+    public IActionResult GetMessages() // Get all messages
     {
         var messages = _context.ChatMessages.ToList();
         return Ok(messages);
     }
 
-    [HttpGet("message/{id}")]
+    [HttpGet("message/{id}")] // Get a specific message
     public IActionResult GetMessage(string id)
     {
         if (id == null)
@@ -40,7 +40,7 @@ public class ChatMessagesController : ControllerBase
         return Ok(message);
     }
 
-    [HttpGet("message/{senderId}/{recipientId}")]
+    [HttpGet("message/{senderId}/{recipientId}")] // Get messages between two users
     public IActionResult GetMessages(string senderId, string recipientId)
     {
         if (senderId == null || recipientId == null)

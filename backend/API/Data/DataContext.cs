@@ -10,14 +10,14 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
     public DbSet<ChatMessage> ChatMessages { get; set; }
     //
     
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
+    protected override void OnConfiguring(DbContextOptionsBuilder options) // Configure the connection to the database
     {
         var serverVersion = new MySqlServerVersion(new Version(8, 0, 23));
         options.UseMySql("server=104.248.197.46;user=root;database=Bama;port=3306;password=example", serverVersion,
             mysqlOptions => mysqlOptions.EnableRetryOnFailure());
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder) // Define the relationships between the tables
     {
         base.OnModelCreating(modelBuilder);
         
