@@ -51,4 +51,39 @@ public class ChatMessagesController : ControllerBase
         var messages = _context.ChatMessages.Where(m => m.SenderId == senderId && m.RecipientId == recipientId).ToList();
         return Ok(messages);
     }
+
+
+    [HttpPost("message")]
+    public IActionResult SendMessage([FromBody] ChatMessage message)
+    {
+        if (message == null)
+        {
+            return BadRequest();
+        }
+
+        _context.ChatMessages.Add(message);
+        _context.SaveChanges();
+
+        return Ok(message);
+    }
+
+    [HttpDelete("message/{id}")]
+    public IActionResult DeleteMessage(string id)
+    {
+        if (id == null)
+        {
+            return BadRequest();
+        }
+
+        var message = _context.ChatMessages.Find(id);
+        if (message == null)
+        {
+            return NotFound();
+        }
+
+        _context.ChatMessages.Remove(message);
+        _context.SaveChanges();
+
+        return Ok();
+    }
 }

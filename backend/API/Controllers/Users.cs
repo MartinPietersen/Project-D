@@ -41,4 +41,17 @@ public class Users : ControllerBase
 
         return Ok(user);
     }
+
+
+    [HttpGet("user/chat/{id}")]
+    public IActionResult GetUserChat(string recipientId, string senderId)
+    {
+        if (recipientId == null || senderId == null)
+        {
+            return BadRequest();
+        }
+
+        var messages = _context.ChatMessages.Where(m => m.RecipientId == recipientId && m.SenderId == senderId).ToList();
+        return Ok(messages);
+    }
 }
