@@ -2,18 +2,13 @@ package com.example.bama
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,6 +33,17 @@ fun ForgotPasswordPage(navController: NavHostController) { // This page is the f
         content = {
             val padding = it
             BackgroundCanvas()
+            var email by remember { mutableStateOf("") }
+            var showError by remember { mutableStateOf(false) }
+            var errorMessage by remember { mutableStateOf("") }
+
+            if (showError) {
+                ErrorDialogPage(
+                    errorMessage = errorMessage,
+                    onDismiss = { showError = false }
+                )
+            }
+
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -49,10 +55,22 @@ fun ForgotPasswordPage(navController: NavHostController) { // This page is the f
                 ForgotPasswordSection()
                 Spacer(modifier = Modifier.height(100.dp))
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    EnterEmailForm()
+                    EnterEmailForm(
+                        email = email,
+                        onEmailChange = { email = it }
+                    )
                 }
                 Spacer(modifier = Modifier.height(150.dp))
-                ForgotPasswordActions(sendEmailClicked = { /*TODO*/ })
+                ForgotPasswordActions(
+                    sendEmailClicked = {
+                        if (!isValidEmailFormat(email)) {
+                            showError = true
+                            errorMessage = "Incorrect email adres"
+                        } else {
+                            // Handle send email logic here
+                        }
+                    }
+                )
             }
         },
         bottomBar = {}
@@ -75,9 +93,10 @@ fun ForgotPasswordSection() {
 }
 
 @Composable
-fun EnterEmailForm() { // This is the form where the user can enter their email
-    var email by remember { mutableStateOf("") }
-
+fun EnterEmailForm(
+    email: String,
+    onEmailChange: (String) -> Unit
+) { // This is the form where the user can enter their email
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.End,
@@ -87,7 +106,7 @@ fun EnterEmailForm() { // This is the form where the user can enter their email
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.fillMaxWidth(),
             value = email,
-            onValueChange = { email = it },
+            onValueChange = onEmailChange,
             placeholder = {
                 Row {
                     Icon(
@@ -142,7 +161,9 @@ fun ForgotPasswordActions(sendEmailClicked: () -> Unit) { // This is the button 
 @Composable
 fun BackButtonForgotPassword(onBackClick: () -> Unit) {
     Button(
-        modifier = Modifier.background(Green, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp)).padding(top = 8.dp),
+        modifier = Modifier
+            .background(Green, shape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp))
+            .padding(top = 8.dp),
         onClick = onBackClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = Green, contentColor = Color.White
@@ -163,4 +184,27 @@ fun BackButtonForgotPassword(onBackClick: () -> Unit) {
             letterSpacing = 1.sp
         )
     }
+}
+
+@Composable
+fun ErrorDialogPage(errorMessage: String, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text("OK")
+            }
+        },
+        title = {
+            Text(text = "Foutmelding")
+        },
+        text = {
+            Text(text = errorMessage)
+        }
+    )
+}
+
+fun isValidEmailFormat(email: String): Boolean {
+    val emailRegex = Regex("""[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}""")
+    return emailRegex.matches(email)
 }
