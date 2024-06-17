@@ -20,7 +20,7 @@ enum class BamaScreens(@StringRes val title: Int) {
 }
 
 @Composable
-fun BAMAApp(
+fun BAMAApp( // This page is the main page of the app and it is the first page that is displayed when the app is opened
     navController: NavHostController = rememberNavController()
 ) {
     NavHost(

@@ -55,7 +55,7 @@ import com.example.bama.ui.theme.drawOvalsBehind
 import com.example.bama.ui.theme.drawOvalsBehindHome
 
 @Composable
-fun HomePage(navHostController: NavHostController = rememberNavController()) {
+fun HomePage(navHostController: NavHostController = rememberNavController()) { // This page is the home page where the user can see their statistics and upcoming activities
     // get the screen height
     // get the screen width
     val configuration = LocalConfiguration.current
@@ -123,7 +123,7 @@ fun HomePage(navHostController: NavHostController = rememberNavController()) {
 }
 
 @Composable
-fun RowWithImageAndDate(navHostController: NavHostController) {
+fun RowWithImageAndDate(navHostController: NavHostController) { // This is the row that displays the upcoming activities
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -191,7 +191,7 @@ fun RowWithImageAndDate(navHostController: NavHostController) {
 }
 
 @Composable
-fun CardWithStatButtons() {
+fun CardWithStatButtons() { // This is the card that displays the user's statistics
     ElevatedCard(
         modifier = Modifier
             .padding(16.dp)
@@ -235,7 +235,6 @@ fun CardWithStatButtons() {
             )
 
         }
-
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxWidth()
@@ -255,10 +254,7 @@ fun CardWithStatButtons() {
                 modifier = Modifier.weight(1f),
                 onClick = { /*TODO*/ },
                 color = Green
-
-
             )
-
         }
     }
 }
@@ -281,7 +277,6 @@ fun ButtonWithActivityStats(
         shape = RoundedCornerShape(16.dp),
         contentPadding = PaddingValues(0.dp)
     ) {
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -318,7 +313,7 @@ fun ButtonWithActivityStats(
 }
 
 @Composable
-fun Greeting(name: String) {
+fun Greeting(name: String) { // This is the greeting that is displayed at the top of the home page
     Text(text = "Welkom $name!", style = MaterialTheme.typography.titleLarge, color = WhiteBroken)
     Text(
         text = "Hier zie je een overzicht van je gegevens",
@@ -328,7 +323,7 @@ fun Greeting(name: String) {
 }
 
 @Composable
-fun LayeredCirclesWithPoints(widthDP: Int, modifier: Modifier) {
+fun LayeredCirclesWithPoints(widthDP: Int, modifier: Modifier) { // This is the circle that displays the user's points
     var bigBox = (widthDP * 0.5).dp
     var middleBox = (bigBox.value * 0.85).dp
     var smallBox = (middleBox.value * 0.80).dp
@@ -378,7 +373,7 @@ fun LayeredCirclesWithPoints(widthDP: Int, modifier: Modifier) {
 }
 
 @Composable
-fun GreenRoundedRectangle(heightDP: Int) {
+fun GreenRoundedRectangle(heightDP: Int) { // This is the green rectangle that is displayed at the top of the home page
 
     Box(
         modifier = Modifier

@@ -29,7 +29,7 @@ import com.example.bama.ui.theme.Green
 import com.example.bama.ui.theme.WhiteBroken
 
 @Composable
-fun ForgotPasswordPage(navController: NavHostController) {
+fun ForgotPasswordPage(navController: NavHostController) { // This page is the forgot password page where the user can reset their password
     Scaffold(
         containerColor = WhiteBroken,
         topBar = {
@@ -75,7 +75,7 @@ fun ForgotPasswordSection() {
 }
 
 @Composable
-fun EnterEmailForm() {
+fun EnterEmailForm() { // This is the form where the user can enter their email
     var email by remember { mutableStateOf("") }
 
     Column(
@@ -110,7 +110,7 @@ fun EnterEmailForm() {
 }
 
 @Composable
-fun ForgotPasswordActions(sendEmailClicked: () -> Unit) {
+fun ForgotPasswordActions(sendEmailClicked: () -> Unit) { // This is the button that the user can click to send an email
     Column {
         Button(
             onClick = sendEmailClicked,

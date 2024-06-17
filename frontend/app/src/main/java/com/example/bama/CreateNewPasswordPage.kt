@@ -31,7 +31,7 @@ import com.example.bama.ui.theme.WhiteBroken
 
 @Composable
 @Preview
-fun CreateNewPassword(navController: NavHostController = rememberNavController()) {
+fun CreateNewPassword(navController: NavHostController = rememberNavController()) { // This page is the create new password page where the user can create a new password
     Scaffold(
         containerColor = WhiteBroken,
         topBar = {},
@@ -75,7 +75,7 @@ fun EnterNewPasswordSection() {
 }
 
 @Composable
-fun EnterNewPasswordForm() {
+fun EnterNewPasswordForm() { // This is the form where the user can enter their new password
     var wachtwoord by remember { mutableStateOf("") }
     var wachtwoordAck by remember { mutableStateOf("") }
 
@@ -136,7 +136,7 @@ fun EnterNewPasswordForm() {
 }
 
 @Composable
-fun CreateNewPasswordActions(SaveClicked: () -> Unit) {
+fun CreateNewPasswordActions(SaveClicked: () -> Unit) { // This is the button that the user can click to save their new password
     Column {
         Button(
             onClick = SaveClicked,

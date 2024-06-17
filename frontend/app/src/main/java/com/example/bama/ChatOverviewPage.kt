@@ -54,7 +54,7 @@ import com.example.bama.ui.theme.drawOvalsBehind
 
 @Composable
 @Preview
-fun ChatOverviewPage(navController: NavHostController = rememberNavController()) {
+fun ChatOverviewPage(navController: NavHostController = rememberNavController()) { // This page is the chat overview page where the user can see all the chats they have
 
     WhiteBackGround()
     Scaffold(
@@ -117,7 +117,7 @@ fun ChatOverviewPage(navController: NavHostController = rememberNavController())
 }
 
 @Composable
-fun ContactCard(contact: Message, onClick: () -> Unit = {}) {
+fun ContactCard(contact: Message, onClick: () -> Unit = {}) { // This is the card that is displayed for each chat
     Row(
         modifier = Modifier
             .fillMaxWidth()
