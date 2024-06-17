@@ -9,7 +9,7 @@ public class UserCoins
 	[Key]
 	public int Id { get; set; }
 
-	public User User { get; set; }
+	public virtual User User { get; set; }
 
 	public int Coins { get; set; } = 0;
 
