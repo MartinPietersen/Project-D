@@ -57,7 +57,7 @@ import com.example.bama.ui.theme.drawOvalsBehind
 
 @Preview
 @Composable
-fun ChatPage(navController: NavHostController = rememberNavController()) {
+fun ChatPage(navController: NavHostController = rememberNavController()) { // This page is the chat page where the user can chat with the buurtsportcoach
     var messages by remember { mutableStateOf(populateChatMessages()) }
     var lastSent by remember { mutableStateOf("") }
     var chatMessage by remember { mutableStateOf("") }
@@ -215,7 +215,7 @@ fun ChatPage(navController: NavHostController = rememberNavController()) {
                                     unfocusedLabelColor = GrayDark
                                 ),
                             )
-
+                            // Send button
                             Button(
                                 onClick = {
                                     if (chatMessage.isNotBlank()) {
@@ -256,7 +256,7 @@ fun ChatPage(navController: NavHostController = rememberNavController()) {
     )
 }
 
-fun populateChatMessages(): List<Message> {
+fun populateChatMessages(): List<Message> { // This function populates the chat with messages, should be changed to fetch messages from the database
     return listOf(
         Message(
             "Hallo John, Doe je volgende week Dinsdag mee met de wandeling?",
@@ -326,13 +326,13 @@ fun ReceivedChatMessage(lastSent: String, message: String) {
     }
 }
 
-fun addMessage(message: String, messages: MutableList<Message>): MutableList<Message> {
+fun addMessage(message: String, messages: MutableList<Message>): MutableList<Message> { // This function adds a message to the chat
     messages.add(Message(message, "John", "12:00"))
     return messages
 }
 
 @Composable
-fun SentChatMessage(message: String) {
+fun SentChatMessage(message: String) { // This function displays a sent message
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -341,7 +341,6 @@ fun SentChatMessage(message: String) {
         horizontalArrangement = Arrangement.End
     )
     {
-
         Box(
             modifier = Modifier
                 .padding(8.dp, 0.dp)

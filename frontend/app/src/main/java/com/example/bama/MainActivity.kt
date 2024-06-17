@@ -8,7 +8,7 @@ import com.example.bama.ui.theme.BAMATheme
 class MainActivity : ComponentActivity(
 
 ) {
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) { // This is the main activity of the app
         super.onCreate(savedInstanceState)
         setContent {
             BAMATheme {

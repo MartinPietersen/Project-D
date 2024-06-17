@@ -58,7 +58,7 @@ import com.example.bama.ui.theme.drawOvalsBehind
 
 
 @Composable
-fun ActivitiesPage(navController: NavHostController) {
+fun ActivitiesPage(navController: NavHostController) {// ActivitiesPage is the main page for the activities.
     var selectedButtonIndex by remember { mutableStateOf(0) }
 
     val onValueChange: (Int) -> Unit = { index ->
@@ -107,7 +107,7 @@ fun ActivitiesPage(navController: NavHostController) {
 }
 
 @Composable
-fun UpcomingActivities(navController: NavHostController) {
+fun UpcomingActivities(navController: NavHostController) { // UpcomingActivities is a list of activities that are coming up.
     Column(
         modifier = Modifier.padding()
     ) {
@@ -130,7 +130,7 @@ fun UpcomingActivities(navController: NavHostController) {
         }
         LazyRow() {
             item {
-                Button(onClick = { navController.navigate(BamaScreens.ActivityDetails.name) }) {
+                Button(onClick = { navController.navigate(BamaScreens.ActivityDetails.name) }) {// This button navigates to the ActivityDetails screen.
                     Text(text = "Activiteit 1")
                 }
                 Button(onClick = { /*TODO*/ }) {
@@ -188,7 +188,7 @@ fun WhiteBackGround() {
 }
 
 @Composable
-fun ActivitiesStatusBar(selectedButtonIndex: Int, onValueChange: (Int) -> Unit) {
+fun ActivitiesStatusBar(selectedButtonIndex: Int, onValueChange: (Int) -> Unit) { // ActivitiesStatusBar is a row of buttons that show the status of the activities.
 
 
     Row(
@@ -276,7 +276,6 @@ fun ActivitiesTopBox(modifier: Modifier) {
     }
 //    }
 }
-// Green background with rounded bottom right corner
 
 @Composable
 fun TopBar(modifier: Modifier) {
@@ -333,7 +332,7 @@ fun SearchBar(modifier: Modifier) {
 data class Activity(val name: String)
 
 @Composable
-fun ActivityGrid(weight: Modifier) {
+fun ActivityGrid(weight: Modifier) { // ActivityGrid is a grid of buttons that represent the activities.
     val activities = listOf<Activity>(
         Activity("Walking"),
         Activity("Cycling"),
@@ -361,7 +360,6 @@ fun ActivityGrid(weight: Modifier) {
         Activity("Jumping"),
         Activity("Dancing")
     )
-    // 7 Green tints for the buttons
     val colors = listOf(
         Color(0xFF116F47),
         Color(0xFF138A5A),

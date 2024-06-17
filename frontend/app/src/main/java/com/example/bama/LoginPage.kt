@@ -178,7 +178,7 @@ fun RememberButton() {
 }
 
 @Composable
-fun LoginForm(email: String, onEmailChange: (String) -> Unit, password: String, onPasswordChange: (String) -> Unit) {
+fun LoginForm(email: String, onEmailChange: (String) -> Unit, password: String, onPasswordChange: (String) -> Unit) { // This is the form where the user can enter their email and password
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -239,7 +239,7 @@ fun LoginForm(email: String, onEmailChange: (String) -> Unit, password: String, 
 }
 
 @Composable
-fun LoginPage(navController: NavController) {
+fun LoginPage(navController: NavController) { // This is the login page where the user can login
     BackgroundCanvas()
     TopNavigationBar()
 
@@ -345,7 +345,7 @@ fun WelcomeTextSection() {
 }
 
 @Composable
-fun LoginActions(navController: NavController, email: String, password: String, onLoginResult: (Boolean) -> Unit) {
+fun LoginActions(navController: NavController, email: String, password: String, onLoginResult: (Boolean) -> Unit) { // This is the section where the user can login
     Column {
         TextButton(
             onClick = { navController.navigate(BamaScreens.ForgotPasswordPage.name) },
@@ -393,7 +393,7 @@ fun LoginActions(navController: NavController, email: String, password: String, 
 
 
 @Composable
-fun SignUpPrompt(navController: NavController) {
+fun SignUpPrompt(navController: NavController) { // This is the section where the user can sign up
     val interactionSource = remember { MutableInteractionSource() }
     TextButton(
         onClick = { navController.navigate(BamaScreens.CreateNewAccount.name) },
@@ -415,7 +415,7 @@ fun SignUpPrompt(navController: NavController) {
 
 
 @Composable
-fun ActivityButton(activity: Activity, color: Color) {
+fun ActivityButton(activity: Activity, color: Color) { // This is the button that is displayed for each activity
     Box(
     ) {
         Button(
@@ -430,7 +430,6 @@ fun ActivityButton(activity: Activity, color: Color) {
             colors = ButtonDefaults.buttonColors(
                 containerColor = color
             )
-
         ) {
             Text(
                 text = activity.name,
@@ -438,7 +437,6 @@ fun ActivityButton(activity: Activity, color: Color) {
                 fontSize = 20.sp,
                 color = Color.White
             )
-
         }
     }
 }

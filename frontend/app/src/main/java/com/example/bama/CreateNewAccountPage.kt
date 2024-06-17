@@ -27,7 +27,7 @@ import com.example.bama.ui.theme.WhiteBroken
 
 @Composable
 @Preview
-fun CreateNewAccount(navController: NavHostController = rememberNavController()) {
+fun CreateNewAccount(navController: NavHostController = rememberNavController()) { // This page is the first page of the create new account process where the user can enter their first name, last name and age
     Scaffold(
         containerColor = WhiteBroken,
         topBar = {
@@ -74,7 +74,7 @@ fun CreateNewAccount(navController: NavHostController = rememberNavController())
                 }
                 Spacer(modifier = Modifier.height(30.dp))
                 val isFormValid = firstName.isNotBlank() && lastName.isNotBlank() && age.isNotBlank()
-                CreateAccountActions(
+                CreateAccountActions( // This is the button that the user can click to go to the next page, and where is checked if the form is valid
                     isFormValid = isFormValid,
                     NextClicked = {
                         if (isFormValid) {
@@ -113,7 +113,7 @@ fun CreateNewAccountSection() {
 }
 
 @Composable
-fun EnterDataForm(
+fun EnterDataForm( // This is the form where the user can enter their first name, last name and age
     firstName: String,
     onFirstNameChange: (String) -> Unit,
     lastName: String,
@@ -270,7 +270,7 @@ fun BackButtonCreateAccount(onBackClick: () -> Unit) {
 }
 
 @Composable
-fun ErrorDialog(errorMessage: String, onDismiss: () -> Unit) {
+fun ErrorDialog(errorMessage: String, onDismiss: () -> Unit) { // This is the dialog that is displayed when the user has entered invalid data
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {

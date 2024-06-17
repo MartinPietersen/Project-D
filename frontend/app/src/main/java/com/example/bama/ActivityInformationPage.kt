@@ -84,9 +84,6 @@ fun ActivityInformationScreen(navHostController: NavHostController = rememberNav
                 )
 
             ) {
-                // I want the icon at the right side of the screen
-                // I should change the alignment of the icon
-
                 Icon(
                     imageVector = Icons.Default.Close,
                     contentDescription = "Back",
@@ -111,7 +108,7 @@ fun ActivityInformationScreen(navHostController: NavHostController = rememberNav
                 )
                 {
                     // Image
-                    LoadImage(
+                    LoadImage( // Load image from url
                         url = "https://www.watzijzegt.com/wp-content/uploads/2020/10/gouda-stad-cvchSJpMBk4.jpg",
                         modifier = Modifier
                             .fillMaxWidth()
@@ -119,7 +116,6 @@ fun ActivityInformationScreen(navHostController: NavHostController = rememberNav
                             .padding(0.dp, 0.dp, 0.dp, 0.dp)
                             .clip(shape = RoundedCornerShape(bottomEnd = 55.dp))
                     )
-                    // Green hue gradient
                     Box(
                         modifier = Modifier
                             .matchParentSize()
@@ -167,8 +163,6 @@ fun ActivityInformationScreen(navHostController: NavHostController = rememberNav
                         .height(1.dp)
                         .background(GrayLight.copy(alpha = 0.5f))
                 )
-                // Description
-                // switch case
                 when (selectedTab) {
                     0 -> {
                         ActivityDetailsDescription()
@@ -196,7 +190,7 @@ fun ActivityInformationScreen(navHostController: NavHostController = rememberNav
 }
 
 @Composable
-fun ActivityDetailsDescription() {
+fun ActivityDetailsDescription() { // Description of the activity
     LazyColumn(
         modifier = Modifier
             .padding(16.dp, 4.dp, 16.dp, 16.dp)
@@ -320,7 +314,7 @@ fun TabRowElement(tabs: List<String>, selectedTab: Int, onTabSelected: (Int) -> 
 }
 
 @Composable
-fun LoadImage(url: String, modifier: Modifier = Modifier) {
+fun LoadImage(url: String, modifier: Modifier = Modifier) { // Load image from url
     Image(
         painter = rememberAsyncImagePainter(url),
         contentDescription = null,

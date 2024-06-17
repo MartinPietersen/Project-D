@@ -26,7 +26,7 @@ import com.example.bama.ui.theme.WhiteBroken
 
 @Composable
 @Preview
-fun CreateNewAccountTwo(navController: NavHostController = rememberNavController()) {
+fun CreateNewAccountTwo(navController: NavHostController = rememberNavController()) { // This page is the second page of the create new account process where the user can enter their email and password
     Scaffold(
         containerColor = WhiteBroken,
         topBar = {
@@ -74,7 +74,7 @@ fun CreateNewAccountTwo(navController: NavHostController = rememberNavController
                 val isFormValid = email.isNotBlank() && password.isNotBlank() && confirmedPassword.isNotBlank() && passwordsMatch
                 CreateAccountActionsTwo(
                     isFormValid = isFormValid,
-                    CreateClicked = {
+                    CreateClicked = { // Check if the email and password are valid
                         if (isFormValid) {
                             if (!isValidEmail(email)) {
                                 showError = true
@@ -86,7 +86,6 @@ fun CreateNewAccountTwo(navController: NavHostController = rememberNavController
                             }
                             else {
                                 // Navigate to the next page
-
                                 navController.navigate(BamaScreens.Login.name)
                             }
                         }
@@ -114,7 +113,7 @@ fun CreateNewAccountSectionTwo() {
 }
 
 @Composable
-fun EnterDataFormTwo(
+fun EnterDataFormTwo( // This is the form where the user can enter their email and password
     email: String,
     onEmailChange: (String) -> Unit,
     password: String,
@@ -182,7 +181,7 @@ fun EnterDataFormTwo(
                 focusedContainerColor = Color.White
             )
         )
-        if (password.isNotBlank() || confirmedPassword.isNotBlank()) {
+        if (password.isNotBlank() || confirmedPassword.isNotBlank()) { // Check if the passwords match
             Text(
                 text = if (passwordsMatch) "Wachtwoorden komen overeen" else "Wachtwoorden komen niet overeen",
                 color = if (passwordsMatch) Color.Green else Color.Red,
@@ -252,7 +251,7 @@ fun BackButtonCreateAccountTwo(onBackClick: () -> Unit) {
 }
 
 @Composable
-fun ErrorDialogTwo(errorMessage: String, onDismiss: () -> Unit) {
+fun ErrorDialogTwo(errorMessage: String, onDismiss: () -> Unit) { // This is the dialog that is displayed when the user enters an invalid email or password
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
@@ -269,12 +268,12 @@ fun ErrorDialogTwo(errorMessage: String, onDismiss: () -> Unit) {
     )
 }
 
-fun isValidEmail(email: String): Boolean {
+fun isValidEmail(email: String): Boolean { // Check if the email is valid
     val emailRegex = Regex("""^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}${'$'}""")
     return emailRegex.matches(email)
 }
 
-fun isValidPassword(password: String): Boolean {
+fun isValidPassword(password: String): Boolean { // Check if the password is valid
     val passwordRegex = Regex("""^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,30}${'$'}""")
     return passwordRegex.matches(password)
 }
