@@ -17,7 +17,6 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
         options.UseMySql("server=104.248.197.46;user=root;database=Bama;port=3306;password=example", serverVersion,
             mysqlOptions => mysqlOptions.EnableRetryOnFailure());
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder) // Define the relationships between the tables
     {
         base.OnModelCreating(modelBuilder);
@@ -38,4 +37,3 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
                 .OnDelete(DeleteBehavior.Restrict);
     }
 }
-
