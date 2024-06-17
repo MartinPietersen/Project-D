@@ -54,4 +54,40 @@ public class Users : ControllerBase
         var messages = _context.ChatMessages.Where(m => m.RecipientId == recipientId && m.SenderId == senderId).ToList();
         return Ok(messages);
     }
+    public async Task<List<(string Username, string LastMessage, DateTime DateSent)>> GetUsersWithLastMessagesOptimizedAsync(ApplicationDbContext context)
+    {
+        var usersWithLastMessages = await context.ChatMessages
+            .GroupBy(cm => new { cm.SenderId, cm.Sender.UserName })
+            .Select(g => new
+            {
+                g.Key.UserName,
+                LastMessage = g.OrderByDescending(cm => cm.DateSent).FirstOrDefault()
+            })
+            .Union(
+                context.ChatMessages
+                .GroupBy(cm => new { cm.RecipientId, cm.Recipient.UserName })
+                .Select(g => new
+                {
+                    g.Key.UserName,
+                    LastMessage = g.OrderByDescending(cm => cm.DateSent).FirstOrDefault()
+                })
+            )
+            .GroupBy(x => x.UserName)
+            .Select(g => new
+            {
+                g.Key,
+                LastMessage = g.OrderByDescending(x => x.LastMessage.DateSent).FirstOrDefault().LastMessage
+            })
+            .Select(x => new
+            {
+                Username = x.Key,
+                LastMessage = x.LastMessage.Content,
+                DateSent = x.LastMessage.DateSent
+            })
+            .ToListAsync();
+
+        return usersWithLastMessages
+            .Select(x => (x.Username, x.LastMessage, x.DateSent))
+            .ToList();
+    }
 }

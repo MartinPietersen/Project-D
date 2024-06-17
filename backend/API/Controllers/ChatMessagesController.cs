@@ -17,9 +17,9 @@ public class ChatMessagesController : ControllerBase
     }
 
     [HttpGet("messages")]
-    public IActionResult GetMessages() // Get all messages
+    public async IActionResult GetMessages() // Get all messages
     {
-        var messages = _context.ChatMessages.ToList();
+        var messages = await _context.ChatMessages.ToListAsync();
         return Ok(messages);
     }
 
