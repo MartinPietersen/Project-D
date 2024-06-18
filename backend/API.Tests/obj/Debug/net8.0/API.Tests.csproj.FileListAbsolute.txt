@@ -121,3 +121,6 @@
 /home/ron/Documents/hsr/Project-D/backend/API.Tests/obj/Debug/net8.0/API.Tests.pdb
 /home/ron/Documents/hsr/Project-D/backend/API.Tests/obj/Debug/net8.0/API.Tests.genruntimeconfig.cache
 /home/ron/Documents/hsr/Project-D/backend/API.Tests/obj/Debug/net8.0/ref/API.Tests.dll
+/home/ron/Documents/hsr/Project-D/backend/API.Tests/bin/Debug/net8.0/Castle.Core.dll
+/home/ron/Documents/hsr/Project-D/backend/API.Tests/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll
+/home/ron/Documents/hsr/Project-D/backend/API.Tests/bin/Debug/net8.0/Moq.dll

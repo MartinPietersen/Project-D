@@ -1,0 +1,7 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ce293f12_002Df7fc_002D4209_002Dbda5_002Dd8499906b0b9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetCoins_UserNotFound_ReturnsBadRequest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::E5923BDC-44B8-4755-B526-681F8AEC1861::net8.0::API.Tests.CoinsControllerTests.GetCoins_UserNotFound_ReturnsBadRequest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E5923BDC-44B8-4755-B526-681F8AEC1861::net8.0::API.Tests.CoinsControllerTests.GetCoins_ReturnsUserCoins&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

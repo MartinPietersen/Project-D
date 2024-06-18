@@ -1,10 +1,7 @@
-using System.Net.Mime;
 using System.Security.Claims;
 using API.Data;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
@@ -56,7 +53,7 @@ public class CoinsController : ControllerBase
     /// Returns an <see cref="StatusCodes.Status200OK"/> if the operation is successfull.
     /// Returns an <see cref="StatusCodes.Status400BadRequest"/> if the user is not authenticated or no records are found.</returns>
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType<int>(StatusCodes.Status200OK)]
     [ProducesResponseType<string>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddCoins([FromBody] int amount)
     {
@@ -72,6 +69,6 @@ public class CoinsController : ControllerBase
 
         await _context.SaveChangesAsync();
 
-        return Ok();
+        return Ok(targetUser.Coins);
     }
 }
