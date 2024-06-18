@@ -17,12 +17,9 @@ public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     public async Task GetAuthorizedEndpoint_UnauthorizedWithoutToken(string url)
     {
         var client = _factory.CreateClient();
-
-
-        // Act
+        
         var response = await client.GetAsync(url);
-
-        // Assert
+        
         Assert.Equal(System.Net.HttpStatusCode.Unauthorized, response.StatusCode);
     }
 }
