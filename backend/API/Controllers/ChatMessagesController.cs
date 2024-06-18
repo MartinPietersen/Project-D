@@ -1,5 +1,6 @@
 using API.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -14,21 +15,21 @@ public class ChatMessagesController : ControllerBase
     }
 
     [HttpGet("messages")]
-    public async IActionResult GetMessages() // Get all messages
+    public async Task<IActionResult> GetMessages()
     {
         var messages = await _context.ChatMessages.ToListAsync();
         return Ok(messages);
     }
 
     [HttpGet("message/{id}")] // Get a specific message
-    public IActionResult GetMessage(string id)
+    public async Task<IActionResult> GetMessage(string id)
     {
         if (id == null)
         {
             return BadRequest();
         }
 
-        var message = _context.ChatMessages.Find(id);
+        var message = await _context.ChatMessages.FindAsync(id);
         if (message == null)
         {
             return NotFound();
@@ -38,41 +39,43 @@ public class ChatMessagesController : ControllerBase
     }
 
     [HttpGet("message/{senderId}/{recipientId}")] // Get messages between two users
-    public IActionResult GetMessages(string senderId, string recipientId)
+    public async Task<IActionResult> GetMessages(string senderId, string recipientId)
     {
         if (senderId == null || recipientId == null)
         {
             return BadRequest();
         }
 
-        var messages = _context.ChatMessages.Where(m => m.SenderId == senderId && m.RecipientId == recipientId).ToList();
+        var messages = await _context.ChatMessages.Where(m => m.SenderId == senderId && m.RecipientId == recipientId).ToListAsync();
         return Ok(messages);
     }
 
 
     [HttpPost("message")]
-    public IActionResult SendMessage([FromBody] ChatMessage message)
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> SendMessage([FromBody] ChatMessage message)
     {
         if (message == null)
         {
             return BadRequest();
         }
 
-        _context.ChatMessages.Add(message);
+        await _context.ChatMessages.AddAsync(message);
         _context.SaveChanges();
 
         return Ok(message);
     }
 
     [HttpDelete("message/{id}")]
-    public IActionResult DeleteMessage(string id)
+    public async Task<IActionResult> DeleteMessage(string id)
     {
         if (id == null)
         {
             return BadRequest();
         }
 
-        var message = _context.ChatMessages.Find(id);
+        var message = await _context.ChatMessages.FindAsync(id);
         if (message == null)
         {
             return NotFound();
