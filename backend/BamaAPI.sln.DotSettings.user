@@ -3,5 +3,7 @@
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::E5923BDC-44B8-4755-B526-681F8AEC1861::net8.0::API.Tests.CoinsControllerTests.GetCoins_UserNotFound_ReturnsBadRequest&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::E5923BDC-44B8-4755-B526-681F8AEC1861::net8.0::API.Tests.CoinsControllerTests.GetCoins_ReturnsUserCoins&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E5923BDC-44B8-4755-B526-681F8AEC1861::net8.0::API.Tests.IntergrationTests.LoginTests.Get_EndpointsReturnSuccessAndCorrectContentType&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E5923BDC-44B8-4755-B526-681F8AEC1861::net8.0::API.Tests.IntergrationTests.LoginTests.GetAuthorizedEndpoint_UnauthorizedWithoutToken&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

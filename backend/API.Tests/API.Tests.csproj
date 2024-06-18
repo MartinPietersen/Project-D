@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.6" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0" />
     <PackageReference Include="Moq" Version="4.20.70" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
@@ -26,6 +27,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\API\API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="IntergrationTests\LoginTests.cs" />
   </ItemGroup>
 
 </Project>

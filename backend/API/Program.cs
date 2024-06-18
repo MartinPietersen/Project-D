@@ -1,15 +1,9 @@
 using API.Data;
 using API.Model;
-using API.Services.User;
-using API.Utils;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -45,4 +39,7 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
+
+
+public partial class Program { }
 
