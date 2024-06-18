@@ -130,42 +130,44 @@ fun UpcomingActivities(navController: NavHostController) { // UpcomingActivities
         }
         LazyRow() {
             item {
-                Button(onClick = { navController.navigate(BamaScreens.ActivityDetails.name) }) {// This button navigates to the ActivityDetails screen.
+                Button(onClick = { navController.navigate(BamaScreens.ActivityDetails.name)},
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Green,
+                        contentColor = WhiteBroken
+                    )) {// This button navigates to the ActivityDetails screen.
                     Text(text = "Activiteit 1")
                 }
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Activiteit 1")
+                Button(onClick = { navController.navigate(BamaScreens.ActivityDetails.name)},
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Green,
+                        contentColor = WhiteBroken
+                    )) {// This button navigates to the ActivityDetails screen.
+                    Text(text = "Activiteit 2")
                 }
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Activiteit 1")
+                Button(onClick = { navController.navigate(BamaScreens.ActivityDetails.name)},
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Green,
+                        contentColor = WhiteBroken
+                    )) {// This button navigates to the ActivityDetails screen.
+                    Text(text = "Activiteit 3")
                 }
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Activiteit 1")
+                Button(onClick = { navController.navigate(BamaScreens.ActivityDetails.name)},
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Green,
+                        contentColor = WhiteBroken
+                    )) {// This button navigates to the ActivityDetails screen.
+                    Text(text = "Activiteit 4")
                 }
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Activiteit 1")
-                }
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Activiteit 1")
-                }
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Activiteit 1")
-                }
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Activiteit 1")
-                }
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Activiteit 1")
-                }
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Activiteit 1")
-                }
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Activiteit 1")
+                Button(onClick = { navController.navigate(BamaScreens.ActivityDetails.name)},
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Green,
+                        contentColor = WhiteBroken
+                    )) {// This button navigates to the ActivityDetails screen.
+                    Text(text = "Activiteit 5")
                 }
 
             }
-            
+
         }
     }
 }
@@ -206,14 +208,14 @@ fun ActivitiesStatusBar(selectedButtonIndex: Int, onValueChange: (Int) -> Unit) 
         )
         ActivityStatusButton(
             icon = Icons.Default.DateRange,
-            description = "Overzicht",
+            description = "Ingeschreven",
             modifier = Modifier.weight(0.33f),
             color = if (selectedButtonIndex == 1) Green else Gray,
             onValueChange = { onValueChange(1) },
         )
         ActivityStatusButton(
             icon = Icons.Default.DateRange,
-            description = "Overzicht",
+            description = "Voltooid",
             modifier = Modifier.weight(0.33f),
             color = if (selectedButtonIndex == 2) Green else Gray,
             onValueChange = { onValueChange(2) },
@@ -334,31 +336,10 @@ data class Activity(val name: String)
 @Composable
 fun ActivityGrid(weight: Modifier) { // ActivityGrid is a grid of buttons that represent the activities.
     val activities = listOf<Activity>(
-        Activity("Walking"),
-        Activity("Cycling"),
-        Activity("Running"),
-        Activity("Swimming"),
-        Activity("Jumping"),
-        Activity("Dancing"),
-        Activity("Swimming"),
-        Activity("Jumping"),
-        Activity("Dancing"),
-        Activity("Cycling"),
-        Activity("Running"),
-        Activity("Swimming"),
-        Activity("Jumping"),
-        Activity("Dancing"),
-        Activity("Swimming"),
-        Activity("Jumping"),
-        Activity("Dancing"),
-        Activity("Cycling"),
-        Activity("Running"),
-        Activity("Swimming"),
-        Activity("Jumping"),
-        Activity("Dancing"),
-        Activity("Swimming"),
-        Activity("Jumping"),
-        Activity("Dancing")
+        Activity("Wandelen"),
+        Activity("Fietsen"),
+        Activity("Thuis Oefeningen"),
+        Activity("Zwemmen"),
     )
     val colors = listOf(
         Color(0xFF116F47),

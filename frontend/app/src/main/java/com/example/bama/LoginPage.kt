@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
@@ -304,10 +305,10 @@ fun TopNavigationBar() {
         modifier = Modifier.padding(26.dp)
     ) {
         IconButton(
-            onClick = { /*TODO*/ }, modifier = Modifier.size(32.dp)
+            onClick = { System.exit(0) }, modifier = Modifier.size(32.dp)
         ) {
             Icon(
-                imageVector = Icons.Default.ArrowBack,
+                imageVector = Icons.Default.Close,
                 contentDescription = "Back",
                 tint = Color.White,
                 modifier = Modifier.size(50.dp)
